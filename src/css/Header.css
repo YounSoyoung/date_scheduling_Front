@@ -10,7 +10,7 @@ header {
     padding: 0 40px;
     border-bottom: 2px solid #CCCCCC;
 
-    position: fixed;
+    
 }
 
 .logo{
@@ -37,4 +37,7 @@ img {
     border-radius: 10px;
 }
 
-.icon {}
+a {
+    color: inherit;
+    text-decoration: none;
+}
