@@ -6,11 +6,12 @@ import { API_BASE_URL } from "./config/host-config";
 import Post from "./components/Post";
 import { List } from "@mui/material";
 import { json, Link } from "react-router-dom";
+
 export const BASE_URL = API_BASE_URL + '/api/posts';
 
 const MyPost = () => {
     //토큰 가져오기(임시)
-    const ACCESS_TOKEN = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiLri4nrhKTsnoQyIiwiaXNzIjoiZGF0ZV9zY2hlZHVsaW5nIGFwcCIsImlhdCI6MTY3MTcyOTEyMywiZXhwIjoxNjcxODE1NTIzfQ.Ax7HKZI3CD_muFx4hKG-hj1ROoMPVUtgihp8vN1MbLU4aIqS1uT2eKc6DYowAosynfaRNzDrx2s1yK2q9mepvg";
+    const ACCESS_TOKEN = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiLri4nrhKTsnoQiLCJpc3MiOiJkYXRlX3NjaGVkdWxpbmcgYXBwIiwiaWF0IjoxNjcxODA3NzQ2LCJleHAiOjE2NzE4OTQxNDZ9.b9fe-4i_FVsCG8MeiFjYK2FBjpwN4K16VVOS-UZq_slwlk05e0VD7fKv5nThAnQYkqfQtmLTgmWF6w8DDpfBSQ";
     
     const [mypostList, setMyPostList] = useState([]);
     const [postCnt, setPostCnt] = useState(0);
@@ -69,23 +70,23 @@ const MyPost = () => {
     );
 
     const existPostPage =(
-        <div className="myPosts">
+        <>
+            <div style={{display:'flex', flexDirection:'row', justifyContent: 'flex-end', marginTop:"15px"}}>
+                <Link to='/new'>
+                    <button className="newPostBtn">리뷰 작성하기</button>
+                </Link>
+            </div>
+            <div className="myPosts">
                 {mypostItems}
-        </div>
+            </div>
+        </>
     );
 
     
     return (
-        <div className="wrapper" style={{marginTop: 50}}>
-            <div className="mypage">
-                <button className="my myReviewPage">내 리뷰</button>
-                <button className="my myLikePage">내 좋아요</button>
-                <button className="my mySavePage">내 북마크</button>
-            </div>
+        <>
             {postCnt ? existPostPage : noPostPage}
-
-        </div>
-        
+        </>
     );
 };
 

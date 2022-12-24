@@ -1,18 +1,4 @@
-.myReviewPage {
-    background: #000;
-    color: #fff;
-    
-}
 
-.my{
-    margin-right: 15px;
-    width: 170px;
-    height: 50px;
-    font-size: 25px;
-    font-weight: bold;
-    border-radius: 5px;
-    border: 1px solid;
-}
 
 .wrapper {
     width: 85%;
@@ -42,3 +28,4 @@
     height: 35px;
     margin-top: 15px;
 }
+
