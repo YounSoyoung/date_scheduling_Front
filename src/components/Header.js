@@ -8,7 +8,7 @@ const Header = () => {
     return (
         <header position="fixed">
             <h1 className="logo">
-                <img src={logo} alt="로고"/>
+                DATE SCHEDULING
             </h1>
             <a className="account" href="#">
                 <FontAwesomeIcon icon={faUser} />

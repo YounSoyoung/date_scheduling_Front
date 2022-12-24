@@ -13,10 +13,13 @@ header {
     
 }
 
+
+
 .logo{
-    display: flex;
-    align-items: center;
+    font-weight: bold;
+    font-size: 30px;
 }
+
 
 img {
     height: 60px;
@@ -38,7 +41,7 @@ img {
 }
 
 a {
-    color: inherit;
+    color: #000;
     text-decoration: none;
 }
 

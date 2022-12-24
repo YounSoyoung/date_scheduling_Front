@@ -1,0 +1,42 @@
+.category{
+    display: flex;
+    margin-top: 30px;
+    padding-left: 100px;
+    
+}
+
+h2{
+    margin-left: 20px;
+    width: 130px;
+    height: 35px;
+    font-size: 20px;
+    font-weight: normal;
+    border: 1px solid #000;
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.title, .date{
+    margin-left: 120px;
+    margin-bottom: 10px;
+}
+
+
+
+.image{
+    background: pink;
+    width: 70%;
+    height: 350px;
+    margin: 40px auto;
+}
+
+.content {
+    background: #f2f2f2;
+    width: 70%;
+    height: 300px;
+    margin: 0 auto 50px;
+}
