@@ -1,25 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/PostDetail.css";
+import { API_BASE_URL } from "../config/host-config";
 
-
+export const BASE_URL = API_BASE_URL + '/api/posts';
 
 const PostDetail = () => {
 
+    //카테고리 값
+    const [category, setCategory] = useState({});
+    const {area, address} = category;
+
+    //리뷰 내용
+    const [post, setPost] = useState({});
+    const {title, userId, image, content, regDate} = post;
+
     
+    //실제로는 Post 하나가 클릭이 되었을 때 페이지가 이동이 되고 정보를 불러와야한다
+    //remove, add 함수 참고하기
+    //버튼이 눌렀을 때 만들어놓은 함수에 선택된 Post의 ID를 전달하여 여기서 fetch
+    useEffect(() => {
+        //게시글 내용 불러오기
+        fetch(BASE_URL+`/111`, {
+            method: 'GET',
+            headers: {'Content-type' : 'application/json'}  
+        })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json);
+            console.log(json.category);
+            setCategory(json.category);
+            console.log(json.post);
+            setPost(json.post);
+        });
+    });
 
     return(
             <>
                 <div className="category">
-                    <h2 className="area">서울</h2>
-                    <h2 className="address">용산구</h2>
+                    <h2 className="area">{area}</h2>
+                    <h2 className="address">{address}</h2>
                 </div>
-                <h1 className="title">분위기 좋은 레스토랑</h1>
-                <div className="date">Posted on December 23, 2022 by Joon</div>
+                <h1 className="title">{title}</h1>
+                <div className="date">{userId} | {regDate}</div>
                 <figure class="image">
-                    <img class="placeImg" src="https://ldb-phinf.pstatic.net/20221127_285/16695232164828Vg4O_JPEG/KakaoTalk_20221116_183035554_27.jpg" alt="..." />
+                    <div class="placeImg">{image}</div>
                 </figure>
                 <section className="content">
-                    한남동 맛집 '퓨그릴' 입니다~~~~
+                    {content}
                 </section>
         </>            
     );
