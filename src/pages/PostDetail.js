@@ -5,9 +5,8 @@ import PostInMain from "../components/PostInMain";
 
 export const BASE_URL = API_BASE_URL + '/api/posts';
 
-const PostDetail = ({targetId}) => {
+const PostDetail = () => {
 
-    let postId = targetId;
 
     //카테고리 값
     const [category, setCategory] = useState({});
@@ -17,14 +16,14 @@ const PostDetail = ({targetId}) => {
     const [post, setPost] = useState({});
     const {title, userId, image, content, regDate} = post;
 
-    // const [postId, setPostId] = useState('');
+    const [postId, setPostId] = useState('');
    
 
-    // const a = target => {
-    //     let postId = target.postId;
-    // };
+    const getTargetId = target => {
+        setPostId(target.postId);
+    };
 
-    // <PostInMain key={post.postId} a={a}></PostInMain>
+    <PostInMain getTargetId={getTargetId}></PostInMain>
 
     
     //실제로는 Post 하나가 클릭이 되었을 때 페이지가 이동이 되고 정보를 불러와야한다
