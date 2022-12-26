@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "../css/PostDetail.css";
 import { API_BASE_URL } from "../config/host-config";
+import PostInMain from "../components/PostInMain";
 
 export const BASE_URL = API_BASE_URL + '/api/posts';
 
-const PostDetail = () => {
+const PostDetail = ({targetId}) => {
+
+    let postId = targetId;
 
     //카테고리 값
     const [category, setCategory] = useState({});
@@ -14,13 +17,22 @@ const PostDetail = () => {
     const [post, setPost] = useState({});
     const {title, userId, image, content, regDate} = post;
 
+    // const [postId, setPostId] = useState('');
+   
+
+    // const a = target => {
+    //     let postId = target.postId;
+    // };
+
+    // <PostInMain key={post.postId} a={a}></PostInMain>
+
     
     //실제로는 Post 하나가 클릭이 되었을 때 페이지가 이동이 되고 정보를 불러와야한다
     //remove, add 함수 참고하기
     //버튼이 눌렀을 때 만들어놓은 함수에 선택된 Post의 ID를 전달하여 여기서 fetch
     useEffect(() => {
         //게시글 내용 불러오기
-        fetch(BASE_URL+`/111`, {
+        fetch(BASE_URL+`/post/${postId}`, {
             method: 'GET',
             headers: {'Content-type' : 'application/json'}  
         })
@@ -32,7 +44,7 @@ const PostDetail = () => {
             console.log(json.post);
             setPost(json.post);
         });
-    });
+    },[postId]);
 
     return(
             <>
