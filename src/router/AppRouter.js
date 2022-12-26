@@ -19,7 +19,7 @@ const AppRouter = () => {
                 {/* '/new' 경로로 요청하면 NewPost 컴포넌트를 렌더링*/}
                 <Route path="/new" element={<NewPost/>}/>
                 {/* '/{postid}' 경로로 요청하면 NewPost 컴포넌트를 렌더링*/}
-                <Route path="/post" element={<PostDetail/>}/>
+                <Route path="/:postId" element={<PostDetail/>}/>
                 <Route element={<MyPageLayout/>}>
                     {/* '/mypost' 경로로 요청하면 MyPost 컴포넌트를 렌더링*/}
                     <Route path="/mypost" element={<MyPost/>}/>

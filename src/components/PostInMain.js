@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, CardMedia, CardContent, Typography, Button, CardActions } from "@mui/material";
 import PostDetail from "../pages/PostDetail";
 
-const PostInMain = ({post, getTargetId}) => {
+const PostInMain = ({post}) => {
 
 
     const [postState, setPostList] = useState(post);
@@ -11,12 +11,12 @@ const PostInMain = ({post, getTargetId}) => {
     const {postId, image, title, regDate} = postState;
 
     const movePageHandler = e => {
-        console.log(post.postId);
+        console.log(post);
         // setPostList({...postState, postId: post.postId})
         // getTargetId(postId);
 
-        getTargetId(post);
-        window.location.href='/post';
+        
+        window.location.href=`/${postId}`;
         
     };
 
