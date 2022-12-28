@@ -5,8 +5,8 @@ import { API_BASE_URL } from "../config/host-config";
 export const BASE_URL = API_BASE_URL + '/api/posts';
 
 function NewPost(){
-    const ACCESS_TOKEN = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiLri4nrhKTsnoQxIiwiaXNzIjoiZGF0ZV9zY2hlZHVsaW5nIGFwcCIsImlhdCI6MTY3MjIyNTYwOSwiZXhwIjoxNjcyMzEyMDA5fQ.k_TIiRlVxcgzt4ChQ58zC6canCQ5sPkxfmrMEvnK5QVmP9UTU94MiOMVrzP4iUdgxbdO6UGvSK9YWPDmv_CmhA";
-
+    
+    const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
     
 
     const [post,setPost] = useState({
