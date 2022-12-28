@@ -45,3 +45,66 @@ a {
     text-decoration: none;
 }
 
+.leftmenu{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    
+    box-sizing: border-box;
+    padding: 0 10px;
+
+    
+}
+
+.menu-open{
+    height: 50px;
+    width: 100px;
+    
+    border: 1px solid #000;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+    
+    box-sizing: border-box;
+   
+}
+
+
+.gnb{
+    background:#fff;
+    border-left: 1px solid #CCCCCC;
+    color:#666;
+    font-size: 30px;
+    margin-top:80px;
+    height:100vh;
+
+    /*절대값으로 위치 조정*/
+    position:fixed;
+    right: -100%;
+    top:0;    
+    display:flex;
+    flex-direction:row-reverse;
+    padding : 70px 150px 70px 50px;
+    box-sizing: border-box;
+    transition: 0.4s;
+    
+}
+
+.close{
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: left;
+    
+}
+
+.gnb ul{
+    margin-top:100px;
+}
+.gnb ul li{
+    margin-bottom : 70px;
+}

@@ -1,0 +1,94 @@
+.wrapper{
+    font-size: 30px;
+}
+
+.wrapper .letter{
+    font-size: 40px;
+    font-weight: bold;
+    margin-top:50px;
+} 
+
+.wrapper .categories{
+    margin-top: 50px;
+    display:flex;
+}
+.wrapper .categories .category{
+    font-weight : bold;
+    font-size : 30px;
+}
+
+.wrapper .categories .area{
+    width : 130px;
+    margin-left:150px;
+}
+.wrapper .categories .address{
+    width : 130px;
+    margin-left : 50px;
+}
+
+.wrapper .title{
+    list-style: none;
+    display:flex;
+}
+.wrapper .title .titlelabel{
+    margin-left:-40px;
+    font-weight: bold;
+    
+}
+.wrapper .title .titlewrite{
+    margin-left:200px;
+    width : 600px;
+    font-size:20px;
+    font-weight: bold;
+    height : 1%;
+    resize : none;
+}
+.wrapper .both{
+    display:flex;
+}
+
+.wrapper .both .image{
+    display: flex;
+    flex-direction: column;
+}
+.wrapper .both .image .imagelabel{
+    font-size: 15px;
+    margin-left:-45px;
+}
+.wrapper .both .image .putimage{
+    width : 400px;
+    height : 400px;
+    margin-left:-45px;
+    margin-right : 100px;
+}
+.wrapper .both .writecontent{
+    margin-top:50px;
+    width : 900px;
+    height : 400px;
+    margin-left:-45px;
+    margin-right : 300px;
+}
+.wrapper .postit{
+    display: flex;
+  justify-content: center;
+  margin-left:600px;
+  width : 300px;
+  height : 50px;
+  padding : 10px 30px;
+  font-size : 20px;
+  font-weight: bold;
+  color : #fff;
+  background-color: #000;
+}
+    /* <div className="wrapper">
+        <div className = "letter">리뷰작성</div>
+        <div className = "cid">카테고리</div>
+        <div className = "title">제목</div>
+
+        <div className = "both">
+            <span className = "image">사진</span>
+            <span className = "title">제목</span>
+        </div>
+    </div> */
+    
+

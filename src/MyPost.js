@@ -10,9 +10,9 @@ import { json, Link } from "react-router-dom";
 export const BASE_URL = API_BASE_URL + '/api/posts';
 
 const MyPost = () => {
-    //토큰 가져오기(임시)
-    const ACCESS_TOKEN = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiLri4nrhKTsnoQiLCJpc3MiOiJkYXRlX3NjaGVkdWxpbmcgYXBwIiwiaWF0IjoxNjcxODA3NzQ2LCJleHAiOjE2NzE4OTQxNDZ9.b9fe-4i_FVsCG8MeiFjYK2FBjpwN4K16VVOS-UZq_slwlk05e0VD7fKv5nThAnQYkqfQtmLTgmWF6w8DDpfBSQ";
-    
+    //토큰 가져오기
+    const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
+
     const [mypostList, setMyPostList] = useState([]);
     const [postCnt, setPostCnt] = useState(0);
 
