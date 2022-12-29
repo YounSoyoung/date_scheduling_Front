@@ -42,3 +42,16 @@
     height: 35px;
     margin-top: 15px;
 }
+
+.searchBox{
+    display: flex;
+    margin: 40px 110px;
+}
+
+.searchBtn{
+    background: #000;
+    color: #fff;
+    border-radius: 5px;
+    margin: 0 10px;
+    width: 50px;
+}

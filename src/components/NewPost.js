@@ -17,10 +17,10 @@ function NewPost(){
         
     })
 
-    const [category,setCategory] = useState({
+    const [category, setCategory] = useState({
         
         area: '서울',
-        address: '송파구'
+        address: '용산구'
     
     })
     
@@ -39,8 +39,8 @@ function NewPost(){
     }
 
     const add = (postCateDTO) => {
-        setPostCateDTO({post,category});
-        fetch(BASE_URL + '/post',{
+        // setPostCateDTO({post,category});
+        fetch(BASE_URL + '/new',{
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
@@ -56,7 +56,7 @@ function NewPost(){
         setPostCateDTO({post,category});
         console.log(postCateDTO);
         add(postCateDTO);
-        window.location.href = '/allpost';
+        window.location.href = '/';
         
     }
     return (

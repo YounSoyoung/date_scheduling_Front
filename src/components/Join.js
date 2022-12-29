@@ -9,7 +9,7 @@ const Join = () => {
     // 회원 입력 정보 상태관리
     const [user, setUser] = useState({
         loginId: '',    // 중복 불가능
-        nickName: '',   // 중복 불가능
+        username: '',   // 중복 불가능
         email: '',      // 중복 불가능
         password: ''
     });
@@ -17,7 +17,7 @@ const Join = () => {
     // 검증 메시지 상태관리
     const [msg, setMsg] = useState({
         loginId: '',
-        nickName: '',
+        username: '',
         email: '',
         password: ''
     });
@@ -25,7 +25,7 @@ const Join = () => {
     // 검증 완료 여부 상태관리
     const [validate, setValidate] = useState({
         loginId: false,
-        nickName: false,
+        username: false,
         email: false,
         password: false
     });
@@ -59,30 +59,30 @@ const Join = () => {
 
 
     // 닉네임을 입력처리 하는 이벤트 핸들러
-    const nickNameHandler = e => {
+    const usernameHandler = e => {
         // console.log(e.target.value);
 
-        const nickNameRegex = /^[가-힣]{2,8}$/;    // 2~8 글자. 한글로만
+        const userNameRegex = /^[가-힣]{2,8}$/;    // 2~8 글자. 한글로만
 
         // 닉네임이 정확히 쓰여진 닉네임인가? - 검증 로직
         let message;    // 입력 상황 메시지
         if (!e.target.value) {  // nickName 을 안 적음.
             message = '닉네임은 필수값입니다.';
-            setValidate({...validate, nickName: false})
-        } else if (!nickNameRegex.test(e.target.value)) {  // 이름은 2~8글자 사이 한글로만. 처음엔 '정규표현식'을 검색해서 사용할 것
+            setValidate({...validate, username: false})
+        } else if (!userNameRegex.test(e.target.value)) {  // 이름은 2~8글자 사이 한글로만. 처음엔 '정규표현식'을 검색해서 사용할 것
                     // 값이 이 정규표현식과 일치하는지 test.
             message = '2~8글자 사이의 한글로 입력해주세요.';
-            setValidate({...validate, nickName: false})
+            setValidate({...validate, username: false})
 
         } else {
             message = '사용 가능한 이름입니다.';
-            setValidate({...validate, nickName: true})
+            setValidate({...validate, username: true})
         }
 
         // console.log(message);
-        setMsg({...msg, nickName: message}) 
+        setMsg({...msg, username: message}) 
         
-        setUser({ ...user, nickName: e.target.value })
+        setUser({ ...user, username: e.target.value })
     };
 
 
@@ -116,10 +116,10 @@ const Join = () => {
             .then(flag => {
                 let message;
                 if (flag) {
-                    message = '중복된 이메일입니다.';
+                    message = '중복된 아이디입니다.';
                     setValidate({...validate, loginId: false});
                 } else {
-                    message = '사용가능한 이메일입니다.';
+                    message = '사용가능한 아이디입니다.';
                     setValidate({...validate, loginId: true});
                 }
                 setMsg({...msg, loginId: message});
@@ -127,20 +127,20 @@ const Join = () => {
     };
 
     // 닉네임 중복확인 서버통신
-    const checkNickName = (nickName) => {
-        console.log('checkNickName!!');
-        fetch(`${API_BASE_URL}/auth/checknickname?nickName=${nickName}`)
+    const checkUsername = (username) => {
+        console.log('checkUsername!!');
+        fetch(`${API_BASE_URL}/auth/checkusername?username=${username}`)
             .then(res => res.json())
             .then(flag => {
                 let message;
                 if (flag) {
-                    message = '중복된 이메일입니다.';
-                    setValidate({...validate, nickName: false});
+                    message = '중복된 닉네임입니다.';
+                    setValidate({...validate, username: false});
                 } else {
-                    message = '사용가능한 이메일입니다.';
-                    setValidate({...validate, nickName: true});
+                    message = '사용가능한 닉네임입니다.';
+                    setValidate({...validate, username: true});
                 }
-                setMsg({...msg, nickName: message});
+                setMsg({...msg, username: message});
             });
     };
 
@@ -230,32 +230,16 @@ const Join = () => {
                     <Grid item xs={12}>
                         <TextField
                             autoComplete="fname"
-                            name="loginId"
+                            name="username"
                             variant="outlined"
                             required
                             fullWidth
-                            id="loginId"
-                            label="아이디"
-                            autoFocus
-                            onChange={loginIdHandler}
-                        />
-                        <span style={validate.loginId ? {color:'green'} : {color:'red'}}>{msg.loginId}</span>
-                        
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <TextField
-                            autoComplete="fname"
-                            name="nickName"
-                            variant="outlined"
-                            required
-                            fullWidth
-                            id="nickName"
+                            id="username"
                             label="닉네임"
                             autoFocus
-                            onChange={nickNameHandler}
+                            onChange={usernameHandler}
                         />
-                        <span style={validate.nickName ? {color:'green'} : {color:'red'}}>{msg.nickName}</span>
+                        <span style={validate.username ? {color:'green'} : {color:'red'}}>{msg.username}</span>
                         
                     </Grid>
                     <Grid item xs={12}>
@@ -269,8 +253,25 @@ const Join = () => {
                             autoComplete="email"
                             onChange={emailHandler}
                         />
+                        <span style={validate.email ? {color:'green'} : {color:'red'}}>{msg.email}</span>
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <TextField
+                            autoComplete="fname"
+                            name="loginId"
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="loginId"
+                            label="아이디"
+                            autoFocus
+                            onChange={loginIdHandler}
+                        />
+                        <span style={validate.loginId ? {color:'green'} : {color:'red'}}>{msg.loginId}</span>
                         
                     </Grid>
+
                     <Grid item xs={12}>
                         <TextField
                             variant="outlined"
