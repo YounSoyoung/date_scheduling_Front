@@ -20,15 +20,95 @@ const AllPost = () => {
     const [area, setArea] = useState('');
     const [address, setAddress] = useState('');
 
-    const handleChange = (event) => {
+    const [category, setCategory] = useState({
+        area: '',
+        address: ''
+    });
+
+   
+    const [areaList, setAreaList] = useState([]);
+    const [addressList, setAddressList] = useState([]);
+
+
+    const selectAreaHandler = (event) => {
+        console.log(event.target.value);
         setArea(event.target.value);
+        setCategory({ ...category, area: event.target.value});
     };
 
-    //Post에게 보낼 삭제 함수
-    //target: 내가 삭제할 리뷰, mypost: 배열에 저장된 사용자의 리뷰
-    
+   const searchAreaHandler = e => {
+        e.preventDefault();
+        console.log('지역 선택');
+        fetch(BASE_URL+'/search')
+        .then(res => res.json())
+        .then(json => {
+            console.log(json.categories);
+            setAreaList(json.categories);
+        })
+   };
 
+   const searchAddressHandler = e => {
+    e.preventDefault();
+
+    console.log('구 선택');
+    fetch(BASE_URL+`/search/${category.area}`)
+    .then(res => res.json())
+    .then(json => {
+        console.log(json.categories);
+        setAddressList(json.categories);
+    })
+};
+
+    const selectAddressHandler = (event) => {
+        console.log(event.target.value);
+        setAddress(event.target.value);
+        setCategory({...category, address: event.target.value});
+    };
+
+    
     const postItems = postList.map(post => <PostInMain key={post.postId} post={post}/>)
+
+    const areaItems = areaList.map(area => <MenuItem value={area.area}>{area.area}</MenuItem>)
+    const addressItems = addressList.map(address => <MenuItem value={address.address}>{address.address}</MenuItem>)
+
+    const [msg, setMsg] = useState('');
+    const [validate, setValidate] = useState(true);
+
+    const searchHandler = e => {
+        e.preventDefault();
+
+        let message;
+        if(!category.area){
+            message = '지역을 선택해주세요';
+            setMsg(message);
+            setValidate(false);
+        } else if(!category.address){
+            message = '구를 선택해주세요';
+            setMsg(message);
+            setValidate(false);
+        } else {
+            setMsg('');
+            searchPost(category);
+        }
+    };
+
+    const searchPost = (category) => {
+
+        fetch(BASE_URL+'/search', {
+            method: 'POST',
+            headers: {
+                'Content-type' : 'application/json'
+            },
+            body: JSON.stringify(category)
+        })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json);
+            setPostList(json.posts);
+            setPostCnt(json.count);
+        })
+    };
+
 
     useEffect(() => {
         //사용자가 작성한 리뷰 목록 불러오기
@@ -48,43 +128,42 @@ const AllPost = () => {
     
     return (
         <>
-            <div className="searchBox">
+        <div className="searchBox">
+            <span className="msg">{msg}</span>
+            <div className="searchCategory">
                 <Box sx={{ width: 150 }} style={{marginRight:10}}>
-                    <FormControl fullWidth>
+                    <FormControl fullWidth onMouseEnter={searchAreaHandler}>
                         <InputLabel id="demo-simple-select-label">지역</InputLabel>
                         <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={area}
                         label="area"
-                        onChange={handleChange}
+                        onChange={selectAreaHandler}
                         >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={10}>Thirty</MenuItem>
+                        {areaItems}
                         </Select>
                     </FormControl>
                 </Box>
                 <Box sx={{ width: 150 }}>
-                    <FormControl fullWidth>
+                    <FormControl fullWidth onMouseEnter={searchAddressHandler}>
                         <InputLabel id="demo-simple-select-label">구</InputLabel>
                         <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={address}
                         label="address"
-                        onChange={handleChange}
+                        onChange={selectAddressHandler}
                         >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        {addressItems}
                         </Select>
                     </FormControl>
                 </Box>
-                <button className="searchBtn">검색</button>
+                <button className="searchBtn" onClick={searchHandler}>검색</button>
             </div>
-
+        </div>
             <div className="wrapper" style={{marginTop: 50}}>
+                <span style={{fontSize: 15}}>총 {postCnt}개의 리뷰들</span>
                 <div className="myPosts">
                     {postItems}
                 </div>
