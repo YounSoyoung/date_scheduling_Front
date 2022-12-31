@@ -39,13 +39,13 @@ const PostDetail = () => {
 
     return(
             <>
-                <div className="category">
+                <div className="postCategory">
                     <h2 className="area">{area}</h2>
                     <h2 className="address">{address}</h2>
                 </div>
-                <h1 className="title">{title}</h1>
+                <h1 className="postTitle">{title}</h1>
                 <div className="date">{userId} | {regDate}</div>
-                <figure class="image">
+                <figure class="postImage">
                     <div class="placeImg">{image}</div>
                 </figure>
                 <section className="content">

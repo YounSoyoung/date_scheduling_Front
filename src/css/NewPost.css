@@ -11,18 +11,22 @@
 .wrapper .categories{
     margin-top: 50px;
     display:flex;
+    align-items: center;
 }
-.wrapper .categories .category{
+
+.category{
     font-weight : bold;
     font-size : 30px;
 }
 
 .wrapper .categories .area{
     width : 130px;
+    height: 40px;
     margin-left:150px;
 }
 .wrapper .categories .address{
     width : 130px;
+    height: 40px;
     margin-left : 50px;
 }
 
@@ -47,38 +51,41 @@
     display:flex;
 }
 
-.wrapper .both .image{
+.image{
     display: flex;
     flex-direction: column;
 }
-.wrapper .both .image .imagelabel{
+.imagelabel{
     font-size: 15px;
     margin-left:-45px;
 }
-.wrapper .both .image .putimage{
+.putimage{
     width : 400px;
     height : 400px;
     margin-left:-45px;
     margin-right : 100px;
 }
-.wrapper .both .writecontent{
+.writecontent{
     margin-top:50px;
     width : 900px;
     height : 400px;
     margin-left:-45px;
     margin-right : 300px;
 }
-.wrapper .postit{
+
+.postit{
     display: flex;
-  justify-content: center;
-  margin-left:600px;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto;
+
   width : 300px;
   height : 50px;
-  padding : 10px 30px;
   font-size : 20px;
   font-weight: bold;
   color : #fff;
   background-color: #000;
+  border-radius: 5px;
 }
     /* <div className="wrapper">
         <div className = "letter">리뷰작성</div>

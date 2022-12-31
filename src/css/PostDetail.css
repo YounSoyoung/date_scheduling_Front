@@ -1,4 +1,4 @@
-.category{
+.postCategory{
     display: flex;
     margin-top: 30px;
     padding-left: 100px;
@@ -20,14 +20,14 @@ h2{
     align-items: center;
 }
 
-.title, .date{
+.postTitle, .date{
     margin-left: 120px;
     margin-bottom: 10px;
 }
 
 
 
-.image{
+.postImage{
     background: pink;
     width: 70%;
     height: 350px;
