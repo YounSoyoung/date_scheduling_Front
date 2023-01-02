@@ -54,3 +54,8 @@ h2{
     display: flex;
     justify-content: space-around;
 }
+
+.commentList{
+    /* margin: 0 auto; */
+    margin: 0 15%;
+}

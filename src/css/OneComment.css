@@ -1,0 +1,7 @@
+.deleteComment{
+    appearance: none;
+    border: 0;
+    outline: 0;
+    background: #fff;
+    border-radius: 5px;
+}

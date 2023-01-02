@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../css/PostDetail.css";
 import { API_BASE_URL } from "../config/host-config";
 import PostInMain from "../components/PostInMain";
-import { json, useLocation } from "react-router-dom";
+import { json, useLocation, Outlet } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faBookmark, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
@@ -102,6 +102,9 @@ const PostDetail = () => {
                 <section className="content">
                     {content}
                 </section>
+                <div>
+                    <Outlet />
+                </div>
         </>            
     );
 };
