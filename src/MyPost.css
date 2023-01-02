@@ -12,7 +12,7 @@
     margin-top: 70px;
 }
 
-.nopost, .noLike{
+.nopost, .noLike, .noLogin{
     display: flex;
     flex-direction: column;
     align-items: center;

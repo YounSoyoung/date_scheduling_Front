@@ -55,34 +55,36 @@ const MyLike = () => {
     useEffect(() => {
         //사용자가 좋아요한 리뷰 목록 불러오기
         console.log('ACCESS_TOKEN: '+ACCESS_TOKEN);
-        fetch(BASE_URL+'/mylike', {
-            method:'GET',
-            headers:{
-                'Authorization' : 'Bearer ' + ACCESS_TOKEN
-            }
-        })
-        .then(res => {
-            console.log(res.status);
-            if(res.status === 403) {
-                setTimeout(() => {
-                    alert('로그인이 필요한 서비스입니다');
-                    window.location.href='/login';
-                }, 1000)
-                return;
-            }else {
-                return res.json();
-            }
-        })
-        .then(json => {
-            setMyLikeCnt(json.count);
-            setMyLikeList(json.posts);
-        });
+        if(ACCESS_TOKEN !== null){
+            fetch(BASE_URL+'/mylike', {
+                method:'GET',
+                headers:{
+                    'Authorization' : 'Bearer ' + ACCESS_TOKEN
+                }
+            })
+            .then(res => {
+                console.log(res.status);
+                if(res.status === 403) {
+                    setTimeout(() => {
+                        alert('로그인이 필요한 서비스입니다');
+                        window.location.href='/login';
+                    }, 1000)
+                    return;
+                }else {
+                    return res.json();
+                }
+            })
+            .then(json => {
+                setMyLikeCnt(json.count);
+                setMyLikeList(json.posts);
+            });
+        }
     },[ACCESS_TOKEN]);
 
 
     const noLoginPage = (
-        <div className="noLike">
-        <div>로그인이 필요한 페이지입니다</div>
+        <div className="noLogin">
+        <div style={{fontSize: 20}}>로그인이 필요한 페이지입니다</div>
         <Link to='/login'>
             <button className="newPostBtn">로그인</button>
         </Link>
@@ -92,7 +94,7 @@ const MyLike = () => {
 
     const noLikePage = (
         <div className="noLike">
-            <div>좋아요한 리뷰가 없습니다</div>
+            <div style={{fontSize: 20}}>좋아요한 리뷰가 없습니다</div>
             <Link to='/'>
                 <button className="newPostBtn">리뷰 보러가기</button>
             </Link>
@@ -111,7 +113,7 @@ const MyLike = () => {
 
     return (
         <>
-            {mylikeCnt ? existPostPage : noLikePage}
+            {(!ACCESS_TOKEN) ? noLoginPage : mylikeCnt ? existPostPage : noLikePage}
         </>
     );
 };
