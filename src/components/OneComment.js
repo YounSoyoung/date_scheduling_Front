@@ -3,18 +3,24 @@ import {TextField, Paper, Button, Grid, List, ListItem, ListItemAvatar, Avatar, 
 import '../css/OneComment.css';
 
 
-const OneComment = ({comment}) => {
-    const [commentState, setCommenState] = useState(comment);
+const OneComment = ({commentItem, remove}) => {
+    const [commentState, setCommenState] = useState(commentItem);
 
-    const {commentid, postid, userid, content, regdate} = commentState;
+    const {userid, content, regdate} = commentState;
+
+    // const [idsState, setIdsState] = useState(postAndCommentid);
+    // const {commentid, postid} = idsState;
+
 
     const USERNAME = localStorage.getItem('LOGIN_USERNAME');
 
     const [account, setAccout] = useState(false);
 
     const deleteCommentHandler = e => {
-        console.log(comment);
+        console.log(commentItem);
+        remove(commentItem);
     };
+
 
     const deleteBtn = (
         <button className="deleteComment" onClick={deleteCommentHandler}>삭제</button>
@@ -25,7 +31,7 @@ const OneComment = ({comment}) => {
             console.log(userid);
             setAccout(true);
         }
-    },[])
+    },[USERNAME])
 
 
     return(

@@ -18,6 +18,11 @@ const Comment = () => {
             content : ''
     })
 
+    // const [postAndCommentid, setPostAndCommentid] = useState({
+    //     postid:'',
+    //     commentid:''
+    // })
+
     const location = useLocation();
     
     const getValue = e =>{
@@ -61,14 +66,30 @@ const Comment = () => {
         e.preventDefault();
 
         add(comment);
-        setComment({...comment, content:''});
+        setComment({content:''});
         
-    }
+    };
 
-    const commentItems = commentList.map(comment => <OneComment key={comment.commentid} comment={comment}/>);
+    const remove = (commentItem) => {
+        console.log('삭제 요청: '+ commentItem);
+        fetch(BASE_URL, {
+            method: 'DELETE',
+            headers: {
+                'Authorization' : 'Bearer ' + ACCESS_TOKEN
+            },
+            body: JSON.stringify(commentItem)
+        })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json);
+            setCommentList(json.comments);
+        })
+    };
+
+    
+    const commentItems = commentList.map(commentItem => <OneComment key={commentItem.commentid} commentItem={commentItem} remove={remove}/>);
 
 
-   
 
     useEffect(()=>{
         //댓글 리스트 불러오기
