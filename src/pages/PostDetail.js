@@ -2,11 +2,16 @@ import React, { useEffect, useState } from "react";
 import "../css/PostDetail.css";
 import { API_BASE_URL } from "../config/host-config";
 import PostInMain from "../components/PostInMain";
-import { useLocation } from "react-router-dom";
+import { json, useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendar, faBookmark, faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 
 export const BASE_URL = API_BASE_URL + '/api/posts';
 
 const PostDetail = () => {
+    //토큰 가져오기
+    const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
 
 
     //카테고리 값
@@ -15,9 +20,46 @@ const PostDetail = () => {
 
     //리뷰 내용
     const [post, setPost] = useState({});
-    const {title, userId, image, content, regDate} = post;
+    const {postId, title, userId, image, content, regDate} = post;
 
    const location = useLocation();
+
+   const [click, setClick] = useState(false);
+
+   const clickLikeHandler = e => {
+        console.log("하트 클릭");
+        setClick(!click);
+
+        if(click){
+            fetch(BASE_URL+`/${postId}`,{
+                method: 'POST',
+                headers: {
+                    'Content-type':'application/json',
+                    'Authorization': 'Bearer ' + ACCESS_TOKEN
+                }
+            })
+            .then(res => res.json())
+            .then(json => {
+                console.log(json);
+            })
+        }
+
+        if(!click){
+            fetch(BASE_URL+`/mylike/${postId}`,{
+                method: 'DELETE',
+                headers: {
+                    'Content-type':'application/json',
+                    'Authorization': 'Bearer ' + ACCESS_TOKEN
+                }
+            })
+            .then(res => res.json())
+            .then(json => {
+                console.log(json);
+            })
+        }
+
+   };
+
 
     
     useEffect(() => {
@@ -43,7 +85,16 @@ const PostDetail = () => {
                     <h2 className="area">{area}</h2>
                     <h2 className="address">{address}</h2>
                 </div>
-                <h1 className="postTitle">{title}</h1>
+                <div className="titleAndIcons">
+                    <h1 className="postTitle">{title}</h1>
+                    <div className="postIcons">
+                        <a className="calendar" href="#">
+                            <FontAwesomeIcon icon={faCalendar} size="2x"/>
+                        </a>
+                        <FontAwesomeIcon icon={faBookmark} size="2x"/>
+                        <FontAwesomeIcon icon={click ? faHeart : faHeartSolid} onClick={clickLikeHandler} size="2x" />
+                    </div>
+                </div>
                 <div className="date">{userId} | {regDate}</div>
                 <figure class="postImage">
                     <div class="placeImg">{image}</div>

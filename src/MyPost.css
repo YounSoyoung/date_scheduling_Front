@@ -5,14 +5,14 @@
     margin: 0 auto;
 }
 
-.myPosts {
+.myPosts, .myLikes{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     margin-top: 70px;
 }
 
-.nopost{
+.nopost, .noLike{
     display: flex;
     flex-direction: column;
     align-items: center;
