@@ -12,6 +12,7 @@ import Join from "../components/Join";
 import Login from "../components/Login";
 import MyBookmark from "../pages/MyBookmark";
 import Comment from "../components/Comment";
+import ModifyPost from "../pages/ModifyPost";
 
 const AppRouter = () => {
     return (
@@ -24,6 +25,8 @@ const AppRouter = () => {
                 <Route path="/join" element={<Join />} />
                 {/* '/new' 경로로 요청하면 NewPost 컴포넌트를 렌더링*/}
                 <Route path="/new" element={<NewPost/>}/>
+                {/* '/new' 경로로 요청하면 NewPost 컴포넌트를 렌더링*/}
+                <Route path="/mypost/:postId" element={<ModifyPost/>}/>
                 {/* '/{postid}' 경로로 요청하면 NewPost 컴포넌트를 렌더링*/}
                 <Route path="/:postId" element={<PostDetail/>}>
                     {/* '/{postid}' 경로로 요청하면 NewPost 컴포넌트를 렌더링*/}

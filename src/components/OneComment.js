@@ -17,7 +17,7 @@ const OneComment = ({commentItem, remove}) => {
     const [account, setAccout] = useState(false);
 
     const deleteCommentHandler = e => {
-        console.log('삭제 버튼 클릭: '+ commentItem);
+        console.log('삭제 버튼 클릭: ', commentItem);
         remove(commentItem);
     };
 

@@ -6,7 +6,13 @@ const Post = ({mypost, remove}) => {
     const [mypostState, setMyPostState] = useState(mypost);
 
 
-    const {image, title, regDate} = mypostState;
+    const {postId, image, title, regDate} = mypostState;
+
+    //수정 이벤트 핸들러
+    const modifyHandler = e => {
+        console.log(mypost);
+        window.location.href=`/mypost/${postId}`;
+    };
 
     //삭제 이벤트 핸들러
     const removeHandler = e => {
@@ -29,7 +35,7 @@ const Post = ({mypost, remove}) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">수정</Button>
+                <Button size="small" onClick={modifyHandler}>수정</Button>
                 <Button size="small" onClick={removeHandler}>삭제</Button>
             </CardActions>
     </Card>
