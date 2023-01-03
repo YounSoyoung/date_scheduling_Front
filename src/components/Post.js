@@ -3,7 +3,7 @@ import { Card, CardMedia, CardContent, Typography, Button, CardActions } from "@
 
 const Post = ({mypost, remove}) => {
 
-    const [mypostState, setMyPostList] = useState(mypost);
+    const [mypostState, setMyPostState] = useState(mypost);
 
 
     const {image, title, regDate} = mypostState;

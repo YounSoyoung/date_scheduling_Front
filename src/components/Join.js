@@ -34,7 +34,7 @@ const Join = () => {
      const loginIdHandler = e => {
         // console.log(e.target.value);
 
-        const loginIdRegex = /^[a-zA-Z]*$/;    //영어로만
+        const loginIdRegex = /^[a-zA-Z]{2,8}$/;    //2~8자리 영어로만
 
         // loginId 가 정확히 쓰여진 loginId인가? - 검증 로직
         let message;    // 입력 상황 메시지
@@ -43,7 +43,7 @@ const Join = () => {
             setValidate({...validate, loginId: false})
         } else if (!loginIdRegex.test(e.target.value)) {  // 이름은 2~8글자 사이 한글로만. 처음엔 '정규표현식'을 검색해서 사용할 것
                     // 값이 이 정규표현식과 일치하는지 test.
-            message = '영어로 입력해주세요.';
+            message = '2~8 글자 사이의 영어로 입력해주세요.';
             setValidate({...validate, loginId: false})
 
         } else {

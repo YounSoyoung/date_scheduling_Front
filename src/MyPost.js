@@ -36,33 +36,44 @@ const MyPost = () => {
 
     useEffect(() => {
         //사용자가 작성한 리뷰 목록 불러오기
-        fetch(BASE_URL+'/mypost', {
-            method:'GET',
-            headers:{
-                'Authorization' : 'Bearer ' + ACCESS_TOKEN
-            }
-        })
-        .then(res => {
-            if(res.status === 403) {
-                setTimeout(() => {
-                    alert('로그인이 필요한 서비스입니다');
-                    window.location.href='/login';
-                }, 1000)
-                return;
-            }else {
-                return res.json();
-            }
-        })
-        .then(json => {
-            setPostCnt(json.count);
-            setMyPostList(json.posts);
-        });
+        if(ACCESS_TOKEN !== null){
+            fetch(BASE_URL+'/mypost', {
+                method:'GET',
+                headers:{
+                    'Authorization' : 'Bearer ' + ACCESS_TOKEN
+                }
+            })
+            .then(res => {
+                if(res.status === 403) {
+                    setTimeout(() => {
+                        alert('로그인이 필요한 서비스입니다');
+                        window.location.href='/login';
+                    }, 1000)
+                    return;
+                }else {
+                    return res.json();
+                }
+            })
+            .then(json => {
+                setPostCnt(json.count);
+                setMyPostList(json.posts);
+            });
+        }
     },[ACCESS_TOKEN]);
+
+    const noLoginPage = (
+        <div className="noLogin">
+        <div style={{fontSize: 20}}>로그인이 필요한 페이지입니다</div>
+        <Link to='/login'>
+            <button className="newPostBtn">로그인</button>
+        </Link>
+    </div>
+    );
 
 
     const noPostPage = (
         <div className="nopost">
-            <div>등록된 리뷰가 없습니다</div>
+            <div style={{fontSize: 20}}>등록된 리뷰가 없습니다</div>
             <Link to='/new'>
                 <button className="newPostBtn">리뷰 작성하기</button>
             </Link>
@@ -85,7 +96,7 @@ const MyPost = () => {
     
     return (
         <>
-            {postCnt ? existPostPage : noPostPage}
+            {(!ACCESS_TOKEN) ? noLoginPage : postCnt ? existPostPage : noPostPage}
         </>
     );
 };

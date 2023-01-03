@@ -20,7 +20,7 @@ h2{
     align-items: center;
 }
 
-.postTitle, .date{
+.date{
     margin-left: 120px;
     margin-bottom: 10px;
 }
@@ -39,4 +39,23 @@ h2{
     width: 70%;
     height: 300px;
     margin: 0 auto 50px;
+}
+
+.titleAndIcons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 85%;
+}
+
+.postIcons{
+    width: 10%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.commentList{
+    /* margin: 0 auto; */
+    margin: 0 15%;
 }
