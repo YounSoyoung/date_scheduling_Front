@@ -6,7 +6,7 @@ import '../css/OneComment.css';
 const OneComment = ({commentItem, remove}) => {
     const [commentState, setCommenState] = useState(commentItem);
 
-    const {userid, content, regdate} = commentState;
+    const {commentid, postid, userid, content, regdate} = commentState;
 
     // const [idsState, setIdsState] = useState(postAndCommentid);
     // const {commentid, postid} = idsState;
@@ -17,7 +17,7 @@ const OneComment = ({commentItem, remove}) => {
     const [account, setAccout] = useState(false);
 
     const deleteCommentHandler = e => {
-        console.log(commentItem);
+        console.log('삭제 버튼 클릭: '+ commentItem);
         remove(commentItem);
     };
 
@@ -25,6 +25,7 @@ const OneComment = ({commentItem, remove}) => {
     const deleteBtn = (
         <button className="deleteComment" onClick={deleteCommentHandler}>삭제</button>
     );
+
 
     useEffect(()=> {
         if(USERNAME == userid){
