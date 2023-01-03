@@ -119,7 +119,10 @@ function NewPost(){
 
         fetch(`${BASE_URL}/new`, {
             method: 'POST',
-            headers: { 'content-type':'application/json' },
+            headers: { 
+                'content-type':'application/json',
+                'Authorization': 'Bearer ' + ACCESS_TOKEN
+            },
             body: JSON.stringify({post, category})
         }).then(res => {
             if (res.status === 200 || res.status === 201) {
