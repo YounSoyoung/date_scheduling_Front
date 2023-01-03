@@ -2,13 +2,13 @@
     font-size: 30px;
 }
 
-.wrapper .letter{
+.letter{
     font-size: 40px;
     font-weight: bold;
     margin-top:50px;
 } 
 
-.wrapper .categories{
+.categories{
     margin-top: 50px;
     display:flex;
     align-items: center;
@@ -17,60 +17,57 @@
 .category{
     font-weight : bold;
     font-size : 30px;
+    margin-right: 40px;
 }
 
-.wrapper .categories .area{
+
+.area, .address{
     width : 130px;
     height: 40px;
-    margin-left:150px;
-}
-.wrapper .categories .address{
-    width : 130px;
-    height: 40px;
-    margin-left : 50px;
 }
 
-.wrapper .title{
+
+
+.title{
+    display: flex;
     list-style: none;
-    display:flex;
+    padding: 0;
 }
-.wrapper .title .titlelabel{
-    margin-left:-40px;
-    font-weight: bold;
-    
+
+.titlelabel{
+    margin-right: 100px;
+    font-weight: bold;    
 }
-.wrapper .title .titlewrite{
-    margin-left:200px;
+.titlewrite{
     width : 600px;
     font-size:20px;
     font-weight: bold;
     height : 1%;
     resize : none;
-}
-.wrapper .both{
-    display:flex;
+
 }
 
-.image{
-    display: flex;
-    flex-direction: column;
+
+.both{
+    margin-top: 50px;
 }
+
+
 .imagelabel{
     font-size: 15px;
-    margin-left:-45px;
+}
+.newContent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 .putimage{
     width : 400px;
     height : 400px;
-    margin-left:-45px;
-    margin-right : 100px;
 }
 .writecontent{
-    margin-top:50px;
-    width : 900px;
+    width : 850px;
     height : 400px;
-    margin-left:-45px;
-    margin-right : 300px;
 }
 
 .postit{

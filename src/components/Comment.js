@@ -71,10 +71,11 @@ const Comment = () => {
     };
 
     const remove = (commentItem) => {
-        console.log('삭제 요청: '+ commentItem);
+        console.log('삭제 요청: ', commentItem);
         fetch(BASE_URL, {
             method: 'DELETE',
             headers: {
+                'Content-type':'application/json',
                 'Authorization' : 'Bearer ' + ACCESS_TOKEN
             },
             body: JSON.stringify(commentItem)
