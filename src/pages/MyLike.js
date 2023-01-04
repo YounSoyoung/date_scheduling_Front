@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../config/host-config";
 import "../MyPost.css";
 import { Link } from "react-router-dom";
-import { Card, CardMedia, CardContent, Typography, Button, CardActions } from "@mui/material";
+import PostInMyLike from "../components/PostInMyLike";
 
 export const BASE_URL = API_BASE_URL + '/api/posts';
 
@@ -14,7 +14,8 @@ const MyLike = () => {
     const [mylikeCnt, setMyLikeCnt] = useState(0);
 
 
-    const removeMyLike = target => {
+    const remove = target => {
+        console.log(target.postId);
         fetch(BASE_URL+`/mylike/${target.postId}`,{
             method: 'DELETE',
             headers:{
@@ -23,38 +24,20 @@ const MyLike = () => {
         })
         .then(res => res.json())
         .then(json => {
+            setMyLikeCnt(json.count);
             setMyLikeList(json.posts);
         })
 
     };
 
+    
 
-    const myLikeItems = mylikeList.map(mylike => 
-        <Card sx={{ width: 242 }} style={{marginRight: 45}}>
-            <CardMedia
-                sx={{ height: 140 }}
-                image={mylike.image} //나중에 사진이 들어간다
-            />
-            <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                    {mylike.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    {mylike.regDate}
-                </Typography>
-            </CardContent>
-            <CardActions>
-                <Button size="small" onClick={removeMyLike}>삭제</Button>
-            </CardActions>
-        </Card>
-        )
-
+    const myLikeItems = mylikeList.map(mylike => <PostInMyLike key={mylike.postId} mylike={mylike} remove={remove}/>)
 
     
 
     useEffect(() => {
         //사용자가 좋아요한 리뷰 목록 불러오기
-        console.log('ACCESS_TOKEN: '+ACCESS_TOKEN);
         if(ACCESS_TOKEN !== null){
             fetch(BASE_URL+'/mylike', {
                 method:'GET',

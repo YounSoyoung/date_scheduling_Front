@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../css/PostDetail.css";
 import { API_BASE_URL } from "../config/host-config";
 import PostInMain from "../components/PostInMain";
@@ -6,6 +6,7 @@ import { json, useLocation, Outlet } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faBookmark, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
+import { TurnedIn } from "@mui/icons-material";
 
 export const BASE_URL = API_BASE_URL + '/api/posts';
 
@@ -24,13 +25,17 @@ const PostDetail = () => {
 
    const location = useLocation();
 
-   const [click, setClick] = useState(false);
+//    const [click, setClick] = useState(false);
+    const clickRef = useRef(false);
 
    const clickLikeHandler = e => {
         console.log("하트 클릭");
-        setClick(!click);
+        // setClick(!click);
+        clickRef.current = !clickRef.current;
+        console.log('클릭 후 하트 상태: ', clickRef.current);
+        
 
-        if(click){
+        if(clickRef.current){
             fetch(BASE_URL+`/${postId}`,{
                 method: 'POST',
                 headers: {
@@ -40,11 +45,11 @@ const PostDetail = () => {
             })
             .then(res => res.json())
             .then(json => {
-                console.log(json);
+                console.log('좋아요 추가: ', json);
             })
         }
-
-        if(!click){
+        
+        if(!clickRef.current){
             fetch(BASE_URL+`/mylike/${postId}`,{
                 method: 'DELETE',
                 headers: {
@@ -54,7 +59,7 @@ const PostDetail = () => {
             })
             .then(res => res.json())
             .then(json => {
-                console.log(json);
+                console.log('좋아요 삭제: ', json);
             })
         }
 
@@ -76,8 +81,20 @@ const PostDetail = () => {
             setCategory(json.category);
             console.log(json.post);
             setPost(json.post);
+            console.log('postId: ', json.post.postId);
+          
+
+            fetch(BASE_URL+`/mylike/${json.post.postId}`, {
+                method: 'GET',
+                headers: {'Authorization': 'Bearer ' + ACCESS_TOKEN}
+            }).then(res => res.json())
+            .then(json => {
+                console.log('하트 저장여부: ', json);
+                clickRef.current = json;
+                console.log('checkLike: ', clickRef.current);
+            })
         });
-    },[location]);
+    },[]);
 
     return(
             <>
@@ -92,7 +109,7 @@ const PostDetail = () => {
                             <FontAwesomeIcon icon={faCalendar} size="2x"/>
                         </a>
                         <FontAwesomeIcon icon={faBookmark} size="2x"/>
-                        <FontAwesomeIcon icon={click ? faHeart : faHeartSolid} onClick={clickLikeHandler} size="2x" />
+                        <FontAwesomeIcon icon={ clickRef.current ? faHeartSolid : faHeart} onClick={clickLikeHandler} size="2x" />
                     </div>
                 </div>
                 <div className="date">{userId} | {regDate}</div>

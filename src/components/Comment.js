@@ -121,7 +121,7 @@ const Comment = () => {
                 </Grid>
             </Grid>
             
-            <List sx={{minWidth: 500, bgcolor: 'background.paper'}}>
+            <List sx={{minWidth: 500, bgcolor: 'background.paper', marginBottom: 10}}>
                 {commentItems}
             </List>
         </div>
