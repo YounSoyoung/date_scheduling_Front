@@ -15,16 +15,17 @@ const MyLike = () => {
 
 
     const removeMyLike = target => {
-        fetch(BASE_URL+`/mylike/${target.postId}`,{
-            method: 'DELETE',
-            headers:{
-                'Authorization' : 'Bearer ' + ACCESS_TOKEN
-            }
-        })
-        .then(res => res.json())
-        .then(json => {
-            setMyLikeList(json.posts);
-        })
+        console.log(target);
+        // fetch(BASE_URL+`/mylike/${target.postId}`,{
+        //     method: 'DELETE',
+        //     headers:{
+        //         'Authorization' : 'Bearer ' + ACCESS_TOKEN
+        //     }
+        // })
+        // .then(res => res.json())
+        // .then(json => {
+        //     setMyLikeList(json.posts);
+        // })
 
     };
 
@@ -48,6 +49,8 @@ const MyLike = () => {
             </CardActions>
         </Card>
         )
+
+    const [mylike, setMylike] = useState();
 
 
     
