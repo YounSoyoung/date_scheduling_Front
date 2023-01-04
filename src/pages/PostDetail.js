@@ -47,7 +47,7 @@ const PostDetail = () => {
             .then(json => {
                 console.log('좋아요 추가: ', json);
             })
-        }else {
+        }else if(!clickRef.current){
             fetch(BASE_URL+`/mylike/${postId}`,{
                 method: 'DELETE',
                 headers: {
@@ -57,7 +57,7 @@ const PostDetail = () => {
             })
             .then(res => res.json())
             .then(json => {
-                console.log('좋아요 취소: ', json);
+                console.log('좋아요 삭제: ', json);
             })
         }
 
@@ -92,7 +92,7 @@ const PostDetail = () => {
                 console.log('checkLike: ', clickRef.current);
             })
         });
-    },[ACCESS_TOKEN]);
+    },[]);
 
     return(
             <>
