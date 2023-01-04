@@ -15,7 +15,6 @@ const Login = () => {
 
         // userid 입력값
         const $loginId = document.getElementById('loginId');
-        // console.log($email.value);
 
         // 패스워드 입력값
         const $password = document.getElementById('password');
