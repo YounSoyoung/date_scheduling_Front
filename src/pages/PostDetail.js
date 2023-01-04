@@ -26,7 +26,7 @@ const PostDetail = () => {
    const location = useLocation();
 
 //    const [click, setClick] = useState(false);
-    const clickRef = useRef();
+    const clickRef = useRef(false);
 
    const clickLikeHandler = e => {
         console.log("하트 클릭");
@@ -47,7 +47,9 @@ const PostDetail = () => {
             .then(json => {
                 console.log('좋아요 추가: ', json);
             })
-        }else if(!clickRef.current){
+        }
+        
+        if(!clickRef.current){
             fetch(BASE_URL+`/mylike/${postId}`,{
                 method: 'DELETE',
                 headers: {
