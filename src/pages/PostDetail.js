@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faBookmark, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { TurnedIn } from "@mui/icons-material";
+import HeartButton from "../components/HeartButton";
 
 export const BASE_URL = API_BASE_URL + '/api/posts';
 
@@ -25,17 +26,18 @@ const PostDetail = () => {
 
    const location = useLocation();
 
-//    const [click, setClick] = useState(false);
-    const clickRef = useRef(false);
+   const [click, setClick] = useState(false);
+    // const clickRef = useRef(false);
 
    const clickLikeHandler = e => {
-        console.log("하트 클릭");
-        // setClick(!click);
-        clickRef.current = !clickRef.current;
-        console.log('클릭 후 하트 상태: ', clickRef.current);
+        console.log("하트 클릭: ", click);
+        setClick((click) => !click);
+        console.log('클릭후 하트 상태: ', click)
+        // clickRef.current = !clickRef.current;
+        // console.log('클릭 후 하트 상태: ', clickRef.current);
         
 
-        if(clickRef.current){
+        if(!click){ //if( clickRef.current )
             fetch(BASE_URL+`/${postId}`,{
                 method: 'POST',
                 headers: {
@@ -49,7 +51,7 @@ const PostDetail = () => {
             })
         }
         
-        if(!clickRef.current){
+        if(click){
             fetch(BASE_URL+`/mylike/${postId}`,{
                 method: 'DELETE',
                 headers: {
@@ -90,8 +92,9 @@ const PostDetail = () => {
             }).then(res => res.json())
             .then(json => {
                 console.log('하트 저장여부: ', json);
-                clickRef.current = json;
-                console.log('checkLike: ', clickRef.current);
+                // clickRef.current = json;
+                // console.log('checkLike: ', clickRef.current);
+                setClick(json);
             })
         });
     },[]);
@@ -109,7 +112,7 @@ const PostDetail = () => {
                             <FontAwesomeIcon icon={faCalendar} size="2x"/>
                         </a>
                         <FontAwesomeIcon icon={faBookmark} size="2x"/>
-                        <FontAwesomeIcon icon={ clickRef.current ? faHeartSolid : faHeart} onClick={clickLikeHandler} size="2x" />
+                        <HeartButton like={click} onClick={clickLikeHandler}/>
                     </div>
                 </div>
                 <div className="date">{userId} | {regDate}</div>
