@@ -14,6 +14,7 @@ import MyBookmark from "../pages/MyBookmark";
 import Comment from "../components/Comment";
 import ModifyPost from "../pages/ModifyPost";
 import NewDateCourse from "../pages/NewDateCourse";
+import ModifyUser from "../components/ModifyUser";
 
 const AppRouter = () => {
     return (
@@ -24,6 +25,7 @@ const AppRouter = () => {
                 <Route path="/" element={<AllPost/>}/>
                 <Route path="/login" element={<Login />} />
                 <Route path="/join" element={<Join />} />
+                <Route path="/modify" element={<ModifyUser />}/>
                 {/* '/new' 경로로 요청하면 NewPost 컴포넌트를 렌더링*/}
                 <Route path="/new" element={<NewPost/>}/>
                 {/* '/:postId/newcourse' 경로로 요청하면 NewDateCourse 컴포넌트를 렌더링*/}
