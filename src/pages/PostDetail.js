@@ -4,10 +4,10 @@ import { API_BASE_URL } from "../config/host-config";
 import PostInMain from "../components/PostInMain";
 import { json, useLocation, Outlet } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar, faBookmark, faHeart } from "@fortawesome/free-regular-svg-icons";
-import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { TurnedIn } from "@mui/icons-material";
 import HeartButton from "../components/HeartButton";
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 
 export const BASE_URL = API_BASE_URL + '/api/posts';
 
@@ -67,6 +67,10 @@ const PostDetail = () => {
 
    };
 
+   const moveNewCoursePage = e => {
+        window.location.href=`/newcourse/${postId}`
+   };
+
 
     
     useEffect(() => {
@@ -108,9 +112,9 @@ const PostDetail = () => {
                 <div className="titleAndIcons">
                     <h1 className="postTitle">{title}</h1>
                     <div className="postIcons">
-                        <a className="calendar" href={`/newcourse/${postId}`}>
-                            <FontAwesomeIcon icon={faCalendar} size="2x"/>
-                        </a>
+                        {/* <button className="calendarBtn" href={`/newcourse/${postId}`} > */}
+                        <FontAwesomeIcon icon={faCalendar} size="2x" onClick={moveNewCoursePage}/>
+
                         <FontAwesomeIcon icon={faBookmark} size="2x"/>
                         <HeartButton like={click} onClick={clickLikeHandler}/>
                     </div>
