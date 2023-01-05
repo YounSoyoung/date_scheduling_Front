@@ -10,7 +10,8 @@ header {
     padding: 0 40px;
     border-bottom: 2px solid #CCCCCC;
 
-    
+    background: #000;
+    color: #fff;    
 }
 
 
@@ -61,8 +62,10 @@ a {
 .menu-open{
     height: 50px;
     width: 100px;
-    
-    border: 1px solid #000;
+
+    background: #fff;
+    color: #000;
+ 
     border-radius: 10px;
     display: flex;
     flex-direction: row;
@@ -71,17 +74,19 @@ a {
 
     
     box-sizing: border-box;
+
+    font-weight: bold;
    
 }
 
 
 .gnb{
-    background:#fff;
-    border-left: 1px solid #CCCCCC;
-    color:#666;
+    background:#000;
+    opacity:0.8;
     font-size: 30px;
-    margin-top:80px;
+    margin-top: 90px;
     height:100vh;
+    width: 450px;
 
     /*절대값으로 위치 조정*/
     position:fixed;
@@ -89,22 +94,39 @@ a {
     top:0;    
     display:flex;
     flex-direction:row-reverse;
-    padding : 70px 150px 70px 50px;
     box-sizing: border-box;
     transition: 0.4s;
-    
+    padding: 20px 40px 0px 0px;
+
+    justify-content: space-around;
 }
+
+
 
 .close{
     flex-direction: row;
     justify-content: space-evenly;
     align-items: left;
-    
+    color: #fff;
+    font-size: 25px;
+    padding-top: 20px;
 }
 
 .gnb ul{
     margin-top:100px;
+    list-style: none;
+    
 }
 .gnb ul li{
-    margin-bottom : 70px;
+    margin-bottom : 50px;
+}
+
+a{
+    font-size: 27px;
+    color: #fff;
+}
+
+a:hover{
+    font-weight: bold;
+    font-size: 30px;
 }
