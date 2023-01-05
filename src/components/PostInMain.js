@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardMedia, CardContent, Typography, Button, CardActions } from "@mui/material";
 import PostDetail from "../pages/PostDetail";
 
 const PostInMain = ({post}) => {
 
 
-    const [postState, setPostList] = useState(post);
+    const [postState, setPostState] = useState(post);
     // const [targetId, setTargetId] = useState('');
 
     const {postId, image, title, regDate} = postState;
@@ -20,10 +20,16 @@ const PostInMain = ({post}) => {
         
     };
 
+    useEffect(()=>{
+        let savedDate = postState.regDate;
+        let postDate = savedDate.substring(0, 10);
+        setPostState({...postState, regDate: postDate})
+    },[])
+
 
 
     return (
-        <Card sx={{ maxWidth: 345 }} style={{marginRight: 45}}>
+        <Card sx={{ width:230 }} style={{marginRight: 45}}>
             <CardMedia
                 sx={{ height: 140 }}
                 image={image} //나중에 사진이 들어간다

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardMedia, CardContent, Typography, Button, CardActions } from "@mui/material";
 
 const PostInMyLike = ({mylike, remove}) => {
@@ -10,20 +10,25 @@ const PostInMyLike = ({mylike, remove}) => {
         remove(mylike);
     };
 
+    useEffect(()=>{
+        let savedDate = mylikeState.regDate;
+        let postDate = savedDate.substring(0, 10);
+        setMyLikeState({...mylikeState, regDate: postDate})
+    },[])
 
 
     return (
-        <Card sx={{ width: 242 }} style={{marginRight: 45}}>
+        <Card sx={{ width: 240 }} style={{marginRight: 45}}>
             <CardMedia
                 sx={{ height: 140 }}
-                image={mylike.image} //나중에 사진이 들어간다
+                image={image} //나중에 사진이 들어간다
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                    {mylike.title}
+                    {title}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    {mylike.regDate}
+                    {regDate}
                 </Typography>
             </CardContent>
             <CardActions>

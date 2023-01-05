@@ -50,17 +50,18 @@ const Header = () => {
             <Button color="inherit">
                 {button}                
             </Button>   
-                <span className ="menu-open" onClick={menuOpenHandler}>menu</span>
+                <span className ="menu-open" onClick={menuOpenHandler}>MENU</span>
             </div>
             <nav className="gnb">
                 <a href="#" className="closes" >
                     <span className="close" onClick={menuCloseHandler}>닫기</span>
                 </a>
                 <ul>
-                    <li><a href="/mypost">마이페이지</a></li>
-                    <li><a href="/mylike">좋아요 목록</a></li>
-                    <li><a href="/mybookmark">북마크한 목록</a></li>
-                    <li><a href="/modify">개인정보 바꾸기</a></li>
+                    <li><a href="/mypost">내 리뷰</a></li>
+                    <li><a href="/mylike">내 좋아요</a></li>
+                    <li><a href="/mybookmark">내 북마크</a></li>
+                    <li><a href="#">내 데이트 코스</a></li>
+                    <li><a href="/modify">개인정보 수정</a></li>
                     
                 </ul>
         </nav>

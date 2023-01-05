@@ -5,6 +5,8 @@ import { API_BASE_URL } from "../config/host-config";
 
 
 const ModifyUser = () => {
+    const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
+
 
     const loginusername = localStorage.getItem('LOGIN_USERNAME');
     const loginuseremail = localStorage.getItem('LOGIN_EMAIL');
@@ -157,7 +159,10 @@ const ModifyUser = () => {
         if(isValid()) { // validate값이 모두 true일 경우
             fetch(API_BASE_URL+'/auth/put', {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + ACCESS_TOKEN
+                },
                 body: JSON.stringify(user)
             }).then(res => {
                 if (res.status === 200) {
