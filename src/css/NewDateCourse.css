@@ -1,0 +1,25 @@
+.courseBox {
+    display: flex;
+    margin: 10px auto;
+}
+
+.scheduleBox {
+    background: #f2f2f2;
+    width: 80%;
+    margin: 0 40px;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.addScheduleBtn{
+    background: #000;
+    color: #fff;
+    align-self: flex-end;
+    border-radius: 5px;
+    height: 35px;
+    width: 150px;
+
+    font-size: 15px;
+}
