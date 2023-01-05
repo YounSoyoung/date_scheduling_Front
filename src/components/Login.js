@@ -15,6 +15,7 @@ const Login = () => {
 
         // userid 입력값
         const $loginId = document.getElementById('loginId');
+        // console.log($email.value);
 
         // 패스워드 입력값
         const $password = document.getElementById('password');
@@ -43,6 +44,7 @@ const Login = () => {
                 // 로그인 성공시 받은 토큰을 로컬 스토리지에 저장
                 localStorage.setItem('ACCESS_TOKEN', loginUserData.token);
                 localStorage.setItem('LOGIN_USERNAME', loginUserData.username);
+                localStorage.setItem('LOGIN_EMAIL', loginUserData.email);
                 // 할일 목록 보여주기
                 window.location.href = '/';
             }
