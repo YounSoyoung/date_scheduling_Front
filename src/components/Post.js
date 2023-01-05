@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardMedia, CardContent, Typography, Button, CardActions } from "@mui/material";
 
 const Post = ({mypost, remove}) => {
@@ -20,8 +20,14 @@ const Post = ({mypost, remove}) => {
         remove(mypost);
     };
 
+    useEffect(()=>{
+        let savedDate = mypostState.regDate;
+        let postDate = savedDate.substring(0, 10);
+        setMyPostState({...mypostState, regDate: postDate})
+    },[])
+
     return (
-        <Card sx={{ maxWidth: 345 }} style={{marginRight: 45}}>
+        <Card sx={{ width: 230 }} style={{marginRight: 45}}>
             <CardMedia
                 sx={{ height: 140 }}
                 image={image} //나중에 사진이 들어간다
