@@ -1,0 +1,28 @@
+.oneCourse{
+    display: flex;
+    background: #fff;
+    margin: 20px 0;
+    padding: 0 10px;
+
+    height: 60px;
+    align-items: center;
+    
+    border-left: 7px solid rgb(148, 148, 148);
+
+}
+
+.savedPostTitle{
+    margin: 0 10px;
+    background: #000;
+    color: #fff;
+    width: 40%;
+    height: 35px;
+
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    font-size: 20px;
+    font-weight: bold;
+}

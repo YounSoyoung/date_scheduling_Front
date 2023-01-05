@@ -108,7 +108,7 @@ const PostDetail = () => {
                 <div className="titleAndIcons">
                     <h1 className="postTitle">{title}</h1>
                     <div className="postIcons">
-                        <a className="calendar" href="#">
+                        <a className="calendar" href={`/newcourse/${postId}`}>
                             <FontAwesomeIcon icon={faCalendar} size="2x"/>
                         </a>
                         <FontAwesomeIcon icon={faBookmark} size="2x"/>
