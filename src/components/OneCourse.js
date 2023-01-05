@@ -13,9 +13,13 @@ const OneCourse = ({mypost}) => {
 
     return(
         <div className="oneCourse">
-            <div style={{fontSize: 20}}>일정</div>
+            <div style={{fontSize: 20 }}>일정</div>
             <div className="savedPostTitle">{title}</div>
-            <ClearOutlinedIcon />
+            <ClearOutlinedIcon style={{justifySelf: "flex-end" }}/>
+            {/* <div className="deleteIcon">
+                <ClearOutlinedIcon />
+            </div> */}
+            
         </div>
     );
 };
