@@ -106,7 +106,7 @@ const Comment = () => {
         .then(res => res.json())
         .then(json => {
             console.log(json);
-            
+            setCommentCnt(json.count);
             setCommentList(json.comments);
         })
     },[location])
@@ -130,7 +130,7 @@ const Comment = () => {
             </Grid>
             
             <List sx={{minWidth: 500, bgcolor: 'background.paper', marginBottom: 10}}>
-                { commentCnt ? commentItems : noComment}
+                { commentCnt? commentItems : noComment }
             </List>
         </div>
         </> 

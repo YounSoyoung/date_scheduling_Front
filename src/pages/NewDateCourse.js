@@ -64,20 +64,23 @@ const NewDateCourse = () => {
     const addCourseHandler = () => {
         console.log('myDateCourse: ', myDateCourse);
 
-        fetch(BASE_URL, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-                'Authorization' : 'Bearer ' + ACCESS_TOKEN
-            },
-            body: JSON.stringify(myDateCourse)
-        })
-        .then(res => res.json())
-        .then(json => {
-            console.log(json);
-            setPostCnt(json.count);
-            setMyPostList(json.posts);
-        })
+        if(myDateCourse.meetingDate !== ""){
+            fetch(BASE_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Authorization' : 'Bearer ' + ACCESS_TOKEN
+                },
+                body: JSON.stringify(myDateCourse)
+            })
+            .then(res => res.json())
+            .then(json => {
+                console.log(json);
+                setPostCnt(json.count);
+                setMyPostList(json.posts);
+            })
+        }
+        
     };
 
 
@@ -85,8 +88,8 @@ const NewDateCourse = () => {
         let pageLocation = location.pathname;
         let pageId = pageLocation.substring(11);
         console.log(pageId);
-        setMyDateCourse({...myDateCourse, postId: pageId});
-
+        let today = moment(value).format("YYYY-MM-DD");
+        setMyDateCourse({postId: pageId, meetingDate: today});
 
     },[]);
 
