@@ -12,9 +12,6 @@ const PostInMain = ({post}) => {
 
     const movePageHandler = e => {
         console.log(post);
-        // setPostList({...postState, postId: post.postId})
-        // getTargetId(postId);
-
         
         window.location.href=`/${postId}`;
         

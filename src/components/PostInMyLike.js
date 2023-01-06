@@ -10,6 +10,13 @@ const PostInMyLike = ({mylike, remove}) => {
         remove(mylike);
     };
 
+    const movePageHandler = e => {
+        console.log(mylike);
+
+        window.location.href=`/${postId}`;
+        
+    };
+
     useEffect(()=>{
         let savedDate = mylikeState.regDate;
         let postDate = savedDate.substring(0, 10);
@@ -24,7 +31,7 @@ const PostInMyLike = ({mylike, remove}) => {
                 image={image} //나중에 사진이 들어간다
             />
             <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h5" component="div" onClick={movePageHandler}>
                     {title}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
