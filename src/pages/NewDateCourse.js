@@ -98,7 +98,7 @@ const NewDateCourse = () => {
 
     return (
         <>
-            <div className="wrapper">
+            <div className="wrapperDateCourse">
                 <h5 style={{fontSize: 40, marginBottom: 40}}>내 일정</h5>
                 <div style={{fontSize: 15}}>날짜를 선택해주세요</div>
                 <div className="courseBox">
