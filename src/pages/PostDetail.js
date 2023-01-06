@@ -30,15 +30,23 @@ const PostDetail = () => {
     // const clickRef = useRef(false);
 
    const clickLikeHandler = e => {
+
+       if(!ACCESS_TOKEN){
+        alert('로그인이 필요한 서비스입니다');
+        window.location.href='/login';
+       }
+
+       if(ACCESS_TOKEN){
         console.log("하트 클릭: ", click);
         setClick((click) => !click);
         console.log('클릭후 하트 상태: ', click)
         // clickRef.current = !clickRef.current;
         // console.log('클릭 후 하트 상태: ', clickRef.current);
+        }
         
 
         if(!click){ //if( clickRef.current )
-            fetch(BASE_URL+`/${postId}`,{
+            fetch(BASE_URL+`/mylike/${postId}`,{
                 method: 'POST',
                 headers: {
                     'Content-type':'application/json',
@@ -49,9 +57,7 @@ const PostDetail = () => {
             .then(json => {
                 console.log('좋아요 추가: ', json);
             })
-        }
-        
-        if(click){
+        }else{
             fetch(BASE_URL+`/mylike/${postId}`,{
                 method: 'DELETE',
                 headers: {
@@ -112,9 +118,7 @@ const PostDetail = () => {
                 <div className="titleAndIcons">
                     <h1 className="postTitle">{title}</h1>
                     <div className="postIcons">
-                        {/* <button className="calendarBtn" href={`/newcourse/${postId}`} > */}
                         <FontAwesomeIcon icon={faCalendar} size="2x" onClick={moveNewCoursePage}/>
-
                         <FontAwesomeIcon icon={faBookmark} size="2x"/>
                         <HeartButton like={click} onClick={clickLikeHandler}/>
                     </div>

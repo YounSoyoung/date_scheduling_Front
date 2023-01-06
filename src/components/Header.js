@@ -13,7 +13,7 @@ const Header = () => {
         //로컬스토리지 데이터 제거
         localStorage.removeItem('LOGIN_USERNAME');
         localStorage.removeItem('ACCESS_TOKEN');
-        window.location.href = '/login';
+        window.location.href = '/';
     }
     const button = USERNAME 
     ?
@@ -24,7 +24,7 @@ const Header = () => {
     :(
         <>
         <Link to = '/login' style = {{color : '#fff', marginRight : 20, textDecoration : 'none'}}>{USERNAME}</Link>
-        <Link to = '/join' style = {{color : '#000', textDecoration : 'none'}}>회원가입</Link>
+        <Link to = '/join' style = {{color : '#fff', textDecoration : 'none', fontSize: 18}}>회원가입</Link>
         </>
     )
     const menuOpenHandler = e => {

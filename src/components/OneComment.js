@@ -13,6 +13,7 @@ const OneComment = ({commentItem, remove}) => {
 
 
     const USERNAME = localStorage.getItem('LOGIN_USERNAME');
+    
 
     const [account, setAccout] = useState(false);
 

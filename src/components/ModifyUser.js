@@ -154,6 +154,8 @@ const ModifyUser = () => {
 
         e.preventDefault();
 
+        console.log('user: ', user);
+
         // 회원입력정보를 모두 읽어서 서버에 요청
 
         if(isValid()) { // validate값이 모두 true일 경우
@@ -241,22 +243,22 @@ const ModifyUser = () => {
                             onChange={passwordOkHandler}
                             
                         />
-                        <span style={validate.password ? {color:'green'} : {color:'red'}}>{msg.passwordok}</span>
+                        <span style={validate.passwordok ? {color:'green'} : {color:'red'}}>{msg.passwordok}</span>
                         
                     </Grid>
                     <Grid item xs={12}>
-                        <Button type="submit" fullWidth variant="contained" color="primary">
-                            계정 생성
+                        <Button type="submit" fullWidth variant="contained" style={{backgroundColor: 'black'}}>
+                            계정 수정
                         </Button>
                     </Grid>
                 </Grid>
-                <Grid container justify="flex-end">
+                {/* <Grid container justify="flex-end">
                     <Grid item>
                         <Link href="/login" variant="body2">
                             이미 계정이 있습니까? 로그인 하세요.
                         </Link>
                     </Grid>
-                </Grid>
+                </Grid> */}
             </form>
         </Container>
     );

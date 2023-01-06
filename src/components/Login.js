@@ -99,7 +99,7 @@ const Login = () => {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            color="primary"
+                            style={{backgroundColor: 'black'}}
                         >
                             로그인
                         </Button>
