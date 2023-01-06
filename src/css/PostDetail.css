@@ -59,3 +59,8 @@ h2{
     /* margin: 0 auto; */
     margin: 0 15%;
 }
+
+.wrapperInPostDetail{
+    width: 85%;
+    margin: 0 auto;
+}

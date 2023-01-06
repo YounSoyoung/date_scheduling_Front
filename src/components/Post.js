@@ -27,7 +27,7 @@ const Post = ({mypost, remove}) => {
     },[])
 
     return (
-        <Card sx={{ width: 230 }} style={{marginRight: 45}}>
+        <Card sx={{ width: 240 }} style={{marginRight: 45}}>
             <CardMedia
                 sx={{ height: 140 }}
                 image={image} //나중에 사진이 들어간다

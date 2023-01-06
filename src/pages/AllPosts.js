@@ -127,7 +127,8 @@ const AllPost = () => {
 
     
     return (
-        <>
+    <>
+    <div className="wrapper"> 
         <div className="searchBox">
             <span className="msg">{msg}</span>
             <div className="searchCategory">
@@ -162,13 +163,27 @@ const AllPost = () => {
                 <button className="searchBtn" onClick={searchHandler}>검색</button>
             </div>
         </div>
-            <div className="wrapper" style={{marginTop: 50}}>
-                <span style={{fontSize: 15}}>총 {postCnt}개의 리뷰들</span>
-                <div className="myPosts">
+            <div className="main" style={{marginTop: 50}}>
+                <span style={{fontSize: 15, marginLeft: 30}}>총 {postCnt}개의 리뷰들</span>
+                <div className="allPosts">
                     {postItems}
                 </div>
             </div>
-        </>
+
+            <footer>
+                <ul>
+                    <li>Studio<p>사업자등록번호:123-12-12345</p><p>대표자:홍길동</p></li>
+                    <li>
+                        <span>A :서울 구로구 남성프라자</span>
+                        <span>A :서울 구로구 남성프라자</span>
+                        <span>A :서울 구로구 남성프라자</span>
+                    </li>
+                    <li>Studio 2023<p>All Rights Reseved</p> </li>      
+                </ul>
+            </footer>
+
+    </div>
+    </>
         
     );
 };
