@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import '../css/PostDetail.css';
 import OneComment from "./OneComment";
+import { Link } from 'react-router-dom';
+
 
 export const BASE_URL = API_BASE_URL + '/api/comments';
 
@@ -13,6 +15,7 @@ const Comment = () => {
     
     
     const [commentList, setCommentList] = useState([]);
+    const [commentCnt, setCommentCnt] = useState(0);
 
     const [comment,setComment] = useState({
             content : ''
@@ -83,10 +86,14 @@ const Comment = () => {
         .then(res => res.json())
         .then(json => {
             console.log(json);
+            setCommentCnt(json.count);
             setCommentList(json.comments);
         })
     };
 
+    const noComment = (
+        <div style={{display: "flex", justifyContent: "center", color: "gray"}}>등록된 댓글이 없습니다</div>
+    );
     
     const commentItems = commentList.map(commentItem => <OneComment key={commentItem.commentid} commentItem={commentItem} remove={remove}/>);
 
@@ -99,6 +106,7 @@ const Comment = () => {
         .then(res => res.json())
         .then(json => {
             console.log(json);
+            
             setCommentList(json.comments);
         })
     },[location])
@@ -122,7 +130,7 @@ const Comment = () => {
             </Grid>
             
             <List sx={{minWidth: 500, bgcolor: 'background.paper', marginBottom: 10}}>
-                {commentItems}
+                { commentCnt ? commentItems : noComment}
             </List>
         </div>
         </> 

@@ -104,7 +104,7 @@ const NewDateCourse = () => {
                 <div className="courseBox">
                     <Calendar onChange={setValue} onClickDay={clickDateHandler} value={value} className="react-calendar"/>
                     <div className="scheduleBox">
-                        <div style={{fontWeight: 700}}>
+                        <div style={{fontWeight: 700, fontSize: 30}}>
                             {moment(value).format("YYYY년 MM월 DD일")} 
                         </div>
                         <box className="mySchedules">
