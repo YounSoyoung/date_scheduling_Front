@@ -4,10 +4,10 @@ import { API_BASE_URL } from "../config/host-config";
 import PostInMain from "../components/PostInMain";
 import { json, useLocation, Outlet } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar, faBookmark, faHeart } from "@fortawesome/free-regular-svg-icons";
-import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { TurnedIn } from "@mui/icons-material";
 import HeartButton from "../components/HeartButton";
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 
 export const BASE_URL = API_BASE_URL + '/api/posts';
 
@@ -30,15 +30,23 @@ const PostDetail = () => {
     // const clickRef = useRef(false);
 
    const clickLikeHandler = e => {
+
+       if(!ACCESS_TOKEN){
+        alert('로그인이 필요한 서비스입니다');
+        window.location.href='/login';
+       }
+
+       if(ACCESS_TOKEN){
         console.log("하트 클릭: ", click);
         setClick((click) => !click);
         console.log('클릭후 하트 상태: ', click)
         // clickRef.current = !clickRef.current;
         // console.log('클릭 후 하트 상태: ', clickRef.current);
+        }
         
 
         if(!click){ //if( clickRef.current )
-            fetch(BASE_URL+`/${postId}`,{
+            fetch(BASE_URL+`/mylike/${postId}`,{
                 method: 'POST',
                 headers: {
                     'Content-type':'application/json',
@@ -49,9 +57,7 @@ const PostDetail = () => {
             .then(json => {
                 console.log('좋아요 추가: ', json);
             })
-        }
-        
-        if(click){
+        }else{
             fetch(BASE_URL+`/mylike/${postId}`,{
                 method: 'DELETE',
                 headers: {
@@ -65,6 +71,10 @@ const PostDetail = () => {
             })
         }
 
+   };
+
+   const moveNewCoursePage = e => {
+        window.location.href=`/newcourse/${postId}`
    };
 
 
@@ -99,6 +109,29 @@ const PostDetail = () => {
         });
     },[]);
 
+    const adres = category.address;
+    
+    const [postList, setPostList] = useState([]);
+    const [postCnt, setPostCnt] = useState(0);
+    const postItems = postList.map(post => <PostInMain key={post.postId} post={post}/>)
+
+    const searchPost = () => {
+        console.log("searchpost 안의 category:",category);
+        fetch(BASE_URL+'/search', {
+            method: 'POST',
+            headers: {
+                'Content-type' : 'application/json'
+            },
+            body: JSON.stringify(category)
+        })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json);
+            setPostList(json.posts);
+            setPostCnt(json.count);
+        })
+    };
+
     return(
             <>
                 <div className="postCategory">
@@ -108,9 +141,7 @@ const PostDetail = () => {
                 <div className="titleAndIcons">
                     <h1 className="postTitle">{title}</h1>
                     <div className="postIcons">
-                        <a className="calendar" href={`/newcourse/${postId}`}>
-                            <FontAwesomeIcon icon={faCalendar} size="2x"/>
-                        </a>
+                        <FontAwesomeIcon icon={faCalendar} size="2x" onClick={moveNewCoursePage}/>
                         <FontAwesomeIcon icon={faBookmark} size="2x"/>
                         <HeartButton like={click} onClick={clickLikeHandler}/>
                     </div>
@@ -125,6 +156,15 @@ const PostDetail = () => {
                 <div>
                     <Outlet />
                 </div>
+                <hr/>
+                
+                <div className="wrapper" style={{marginTop: 50}}>
+                <span style={{fontSize: 15}}>총 {postCnt}개의 리뷰들</span>
+                <div className="myPosts">
+                    <button onClick = {searchPost}>다른 리뷰들 보기</button>
+                    {postItems}
+                </div>
+            </div>
         </>            
     );
 };
