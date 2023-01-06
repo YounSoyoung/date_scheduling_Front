@@ -109,6 +109,29 @@ const PostDetail = () => {
         });
     },[]);
 
+    const adres = category.address;
+    
+    const [postList, setPostList] = useState([]);
+    const [postCnt, setPostCnt] = useState(0);
+    const postItems = postList.map(post => <PostInMain key={post.postId} post={post}/>)
+
+    const searchPost = () => {
+        console.log("searchpost 안의 category:",category);
+        fetch(BASE_URL+'/search', {
+            method: 'POST',
+            headers: {
+                'Content-type' : 'application/json'
+            },
+            body: JSON.stringify(category)
+        })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json);
+            setPostList(json.posts);
+            setPostCnt(json.count);
+        })
+    };
+
     return(
             <>
                 <div className="postCategory">
@@ -133,6 +156,15 @@ const PostDetail = () => {
                 <div>
                     <Outlet />
                 </div>
+                <hr/>
+                
+                <div className="wrapper" style={{marginTop: 50}}>
+                <span style={{fontSize: 15}}>총 {postCnt}개의 리뷰들</span>
+                <div className="myPosts">
+                    <button onClick = {searchPost}>다른 리뷰들 보기</button>
+                    {postItems}
+                </div>
+            </div>
         </>            
     );
 };
