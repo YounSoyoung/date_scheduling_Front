@@ -134,7 +134,7 @@ function NewPost(){
         
     }
     return (
-       <div className="wrapper">
+       <div className="wrapperNewPost">
              <div className = "letter">리뷰작성</div>
              <div className = "categories">
                  <label className="category">카테고리</label>

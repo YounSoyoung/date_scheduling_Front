@@ -8,6 +8,13 @@ const Post = ({mypost, remove}) => {
 
     const {postId, image, title, regDate} = mypostState;
 
+    const movePageHandler = e => {
+        console.log(mypost);
+
+        window.location.href=`/${postId}`;
+        
+    };
+
     //수정 이벤트 핸들러
     const modifyHandler = e => {
         console.log(mypost);
@@ -33,7 +40,7 @@ const Post = ({mypost, remove}) => {
                 image={image} //나중에 사진이 들어간다
             />
             <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h5" component="div" onClick={movePageHandler}>
                     {title}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
