@@ -64,20 +64,23 @@ const NewDateCourse = () => {
     const addCourseHandler = () => {
         console.log('myDateCourse: ', myDateCourse);
 
-        fetch(BASE_URL, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-                'Authorization' : 'Bearer ' + ACCESS_TOKEN
-            },
-            body: JSON.stringify(myDateCourse)
-        })
-        .then(res => res.json())
-        .then(json => {
-            console.log(json);
-            setPostCnt(json.count);
-            setMyPostList(json.posts);
-        })
+        if(myDateCourse.meetingDate !== ""){
+            fetch(BASE_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Authorization' : 'Bearer ' + ACCESS_TOKEN
+                },
+                body: JSON.stringify(myDateCourse)
+            })
+            .then(res => res.json())
+            .then(json => {
+                console.log(json);
+                setPostCnt(json.count);
+                setMyPostList(json.posts);
+            })
+        }
+        
     };
 
 
@@ -85,8 +88,8 @@ const NewDateCourse = () => {
         let pageLocation = location.pathname;
         let pageId = pageLocation.substring(11);
         console.log(pageId);
-        setMyDateCourse({...myDateCourse, postId: pageId});
-
+        let today = moment(value).format("YYYY-MM-DD");
+        setMyDateCourse({postId: pageId, meetingDate: today});
 
     },[]);
 
@@ -98,13 +101,13 @@ const NewDateCourse = () => {
 
     return (
         <>
-            <div className="wrapper">
+            <div className="wrapperDateCourse">
                 <h5 style={{fontSize: 40, marginBottom: 40}}>내 일정</h5>
                 <div style={{fontSize: 15}}>날짜를 선택해주세요</div>
                 <div className="courseBox">
                     <Calendar onChange={setValue} onClickDay={clickDateHandler} value={value} className="react-calendar"/>
                     <div className="scheduleBox">
-                        <div style={{fontWeight: 700}}>
+                        <div style={{fontWeight: 700, fontSize: 30}}>
                             {moment(value).format("YYYY년 MM월 DD일")} 
                         </div>
                         <box className="mySchedules">

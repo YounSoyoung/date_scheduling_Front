@@ -29,7 +29,7 @@ const PostInMain = ({post}) => {
 
 
     return (
-        <Card sx={{ width:230 }} style={{marginRight: 45}}>
+        <Card sx={{ width:240 }} style={{marginLeft: 35, marginRight: 25, marginBottom: 20, marginTop: 20}}>
             <CardMedia
                 sx={{ height: 140 }}
                 image={image} //나중에 사진이 들어간다

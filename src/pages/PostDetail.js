@@ -8,6 +8,7 @@ import { faCalendar, faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { TurnedIn } from "@mui/icons-material";
 import HeartButton from "../components/HeartButton";
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export const BASE_URL = API_BASE_URL + '/api/posts';
 
@@ -15,19 +16,49 @@ const PostDetail = () => {
     //토큰 가져오기
     const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
 
-
     //카테고리 값
     const [category, setCategory] = useState({});
     const {area, address} = category;
+
 
     //리뷰 내용
     const [post, setPost] = useState({});
     const {postId, title, userId, image, content, regDate} = post;
 
+    //현재 페이지 위치
    const location = useLocation();
+   const [postDate, setPostDate] = useState();
 
    const [click, setClick] = useState(false);
     // const clickRef = useRef(false);
+
+    ///////////////////////////
+    const [postList, setPostList] = useState([]);
+    const [postCnt, setPostCnt] = useState(0);
+    const postItems = postList.map(post => <PostInMain key={post.postId} post={post} />);
+
+    
+
+    const searchPost = () => {
+        console.log("searchpost 안의 category:", category);
+        fetch(BASE_URL+`/search${location.pathname}`, {
+            method: 'POST',
+            headers: {
+                'Content-type' : 'application/json'
+            },
+            body: JSON.stringify(category)
+        })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json);
+            setPostList(json.posts);
+            setPostCnt(json.count);
+        })
+    };
+
+
+    ///////////////
+
 
    const clickLikeHandler = e => {
 
@@ -81,7 +112,7 @@ const PostDetail = () => {
     
     useEffect(() => {
         //게시글 내용 불러오기
-        // console.log(location.pathname);
+        console.log(location.pathname);
         fetch(BASE_URL+`${location.pathname}`, {
             method: 'GET',
             headers: {'Content-type' : 'application/json'}  
@@ -90,12 +121,17 @@ const PostDetail = () => {
         .then(json => {
             console.log(json);
             console.log(json.category);
-            setCategory(json.category);
+            setCategory(() => json.category);
+
             console.log(json.post);
             setPost(json.post);
+            let savedDate = json.post.regDate;
+            let date = savedDate.substring(0, 10);
+            setPostDate(date);
             console.log('postId: ', json.post.postId);
-          
 
+            
+    
             fetch(BASE_URL+`/mylike/${json.post.postId}`, {
                 method: 'GET',
                 headers: {'Authorization': 'Bearer ' + ACCESS_TOKEN}
@@ -107,30 +143,13 @@ const PostDetail = () => {
                 setClick(json);
             })
         });
+
+
+
     },[]);
 
-    const adres = category.address;
     
-    const [postList, setPostList] = useState([]);
-    const [postCnt, setPostCnt] = useState(0);
-    const postItems = postList.map(post => <PostInMain key={post.postId} post={post}/>)
-
-    const searchPost = () => {
-        console.log("searchpost 안의 category:",category);
-        fetch(BASE_URL+'/search', {
-            method: 'POST',
-            headers: {
-                'Content-type' : 'application/json'
-            },
-            body: JSON.stringify(category)
-        })
-        .then(res => res.json())
-        .then(json => {
-            console.log(json);
-            setPostList(json.posts);
-            setPostCnt(json.count);
-        })
-    };
+    
 
     return(
             <>
@@ -146,7 +165,7 @@ const PostDetail = () => {
                         <HeartButton like={click} onClick={clickLikeHandler}/>
                     </div>
                 </div>
-                <div className="date">{userId} | {regDate}</div>
+                <div className="date">{userId} | {postDate}</div>
                 <figure class="postImage">
                     <div class="placeImg">{image}</div>
                 </figure>
@@ -156,15 +175,17 @@ const PostDetail = () => {
                 <div>
                     <Outlet />
                 </div>
-                <hr/>
+                <hr style={{width: "90%"}}/>
                 
-                <div className="wrapper" style={{marginTop: 50}}>
-                <span style={{fontSize: 15}}>총 {postCnt}개의 리뷰들</span>
-                <div className="myPosts">
-                    <button onClick = {searchPost}>다른 리뷰들 보기</button>
-                    {postItems}
+                <div className="wrapperInPostDetail" style={{marginTop: 50}}>
+                    <label onClick={searchPost} style={{display: "flex"}}>
+                        <span style={{fontSize: 25, fontWeight: "bold", marginLeft: 25}} >{category.area} {category.address}에 대한 리뷰들 더보기</span>
+                        <ExpandMoreIcon style={{fontSize: "40"}}/>
+                    </label>
+                    <div className="myPosts" style={{marginBottom: 50}}>
+                        {postItems}
+                    </div>
                 </div>
-            </div>
         </>            
     );
 };

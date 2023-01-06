@@ -1,4 +1,4 @@
-.myReviewPage {
+/* .myReviewPage {
     background: #000;
     color: #fff;
     
@@ -63,5 +63,118 @@
     border-radius: 5px;
     margin: 0 10px;
     width: 50px;
+} */
+
+
+/* CSS 추가 */
+/* 카테고리 */
+.searchBox{
+    margin-top: 40px;
+    margin-left: 100px;
 }
+
+
+.searchCategory{
+    display: flex;
+    margin-top: 10px;
+}
+
+.searchBtn{
+    background: #000;
+    color: #fff;
+    border-radius: 5px;
+    margin: 0 10px;
+    width: 50px;
+}
+
+.myReviewPage {
+    background: #000;
+    color: #fff;
+    
+}
+
+.css-14tjg8b-MuiPaper-root-MuiCard-root{
+    float:left; overflow:hidden !important; max-width: initial !important; margin-right:0px !important; width:24%; margin:10px 10px 10px 10px
+}
+
+.my{
+    margin-right: 15px;
+    width: 170px;
+    height: 50px;
+    font-size: 25px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+.wrapper{
+    width: 100%;
+}
+
+.main{
+    width:80%;
+    margin: 0 auto;
+
+}
+
+.allPosts{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+
+.nopost{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+    
+}
+
+.newPostBtn{
+    background: #000;
+    color: #fff;
+    border-radius: 5px;
+    width: 140px;
+    height: 35px;
+    margin-top: 15px;
+}
+
+
+.msg{
+    color: red;
+    font-size: medium;
+}
+
+/* footer */
+footer {
+    width:100%;
+    background: #000;
+    color: #999;
+    position: relative;
+}
+
+footer ul {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 60px 0 0;
+
+}
+
+footer ul li:nth-child(2) {
+    color: #eee;
+    font-size: 16px;
+    color: #999;
+}
+footer ul li {
+    color: rgb(255,255,255);
+    font-size: 16px;
+    line-height: 2;
+    height: 150px;
+}
+
 
