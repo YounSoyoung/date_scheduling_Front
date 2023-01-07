@@ -2,7 +2,8 @@
 /* 카테고리 */
 .searchBox{
     margin-top: 40px;
-    margin-left: 100px;
+    width: 85%;
+    margin: 0 auto;
 }
 
 
@@ -57,15 +58,20 @@
     margin-top: 10px;
 }
 
-.newPostBtn{
-    margin-left: 1000px;
-    height : 100px;
-}
+
 .nopost{
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 200px;
+    
+}
+
+.newBtnBox{
+
+    width: 72%;
+    display: flex;
+    justify-content: flex-end;
     
 }
 
@@ -76,6 +82,7 @@
     width: 140px;
     height: 35px;
     margin-top: 15px;
+
 }
 
 

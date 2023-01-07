@@ -170,12 +170,13 @@ const AllPost = () => {
                     </FormControl>
                 </Box>
                 <button className="searchBtn" onClick={searchHandler}>검색</button>
-                
-                <button className="newPostBtn" onClick={postHandler}>리뷰 작성하기</button>
-                
+                <div className="newBtnBox">
+                    <button className="newPostBtn" onClick={postHandler}>리뷰 작성하기</button>
+                </div>
             </div>
-
+            
         </div>
+
             <div className="main" style={{marginTop: 50}}>
                 <span style={{fontSize: 15, marginLeft: 30}}>총 {postCnt}개의 리뷰들</span>
                 <div className="allPosts">
