@@ -23,6 +23,7 @@ const Header = () => {
     </>
     :(
         <>
+        <Link to = '/login' style = {{color : '#fff', marginRight : 20, textDecoration : 'none'}}>{USERNAME}</Link>
         <Link to = '/login' style = {{color : '#fff', marginRight : 20, textDecoration : 'none', fontSize: 18}}>로그인</Link>
         <Link to = '/join' style = {{color : '#fff', textDecoration : 'none', fontSize: 18}}>회원가입</Link>
         </>

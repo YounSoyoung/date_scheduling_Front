@@ -16,6 +16,7 @@ import ModifyPost from "../pages/ModifyPost";
 import NewDateCourse from "../pages/NewDateCourse";
 import ModifyUser from "../components/ModifyUser";
 import MyCourse from "../pages/MyCourse";
+import Footer from "../components/Footer";
 
 const AppRouter = () => {
     return (
@@ -46,6 +47,7 @@ const AppRouter = () => {
                     <Route path="/mydatecourse" element={<MyCourse />}/>
                 </Route>
             </Routes>
+            <Footer/>
         </>
     );
 };
