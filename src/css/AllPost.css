@@ -1,71 +1,3 @@
-/* .myReviewPage {
-    background: #000;
-    color: #fff;
-    
-}
-
-.my{
-    margin-right: 15px;
-    width: 170px;
-    height: 50px;
-    font-size: 25px;
-    font-weight: bold;
-    border-radius: 5px;
-    border: 1px solid;
-}
-
-.wrapper {
-    width: 85%;
-    margin: 0 auto;
-}
-
-.myPosts {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 30px;
-}
-
-.nopost{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 200px;
-    
-}
-
-.newPostBtn{
-    background: #000;
-    color: #fff;
-    border-radius: 5px;
-    width: 140px;
-    height: 35px;
-    margin-top: 15px;
-}
-
-.searchBox{
-    margin-top: 40px;
-    margin-left: 100px;
-}
-
-.msg{
-    color: red;
-}
-
-.searchCategory{
-    display: flex;
-    margin-top: 10px;
-}
-
-.searchBtn{
-    background: #000;
-    color: #fff;
-    border-radius: 5px;
-    margin: 0 10px;
-    width: 50px;
-} */
-
-
 /* CSS 추가 */
 /* 카테고리 */
 .searchBox{
@@ -114,7 +46,7 @@
 .main{
     width:80%;
     margin: 0 auto;
-
+    min-height: 600px;
 }
 
 .allPosts{
@@ -125,7 +57,10 @@
     margin-top: 10px;
 }
 
-
+.newPostBtn{
+    margin-left: 1000px;
+    height : 100px;
+}
 .nopost{
     display: flex;
     flex-direction: column;

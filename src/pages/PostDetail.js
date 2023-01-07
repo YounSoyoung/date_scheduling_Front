@@ -105,12 +105,6 @@ const PostDetail = () => {
    };
 
    const moveNewCoursePage = e => {
-        if(!ACCESS_TOKEN){
-        alert('로그인이 필요한 서비스입니다');
-        window.location.href='/login';
-       }
-
-
         window.location.href=`/newcourse/${postId}`
    };
 
@@ -172,8 +166,8 @@ const PostDetail = () => {
                     </div>
                 </div>
                 <div className="date">{userId} | {postDate}</div>
-                <figure class="postImage">
-                    <div class="placeImg">{image}</div>
+                <figure className="postImage">
+                    <div className="placeImg">{image}</div>
                 </figure>
                 <section className="content">
                     {content}
