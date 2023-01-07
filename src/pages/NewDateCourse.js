@@ -89,22 +89,35 @@ const NewDateCourse = () => {
     const addCourseHandler = () => {
         console.log('myDateCourse: ', myDateCourse);
 
-        if(myDateCourse.meetingDate !== ""){
-            fetch(BASE_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json',
-                    'Authorization' : 'Bearer ' + ACCESS_TOKEN
-                },
-                body: JSON.stringify(myDateCourse)
-            })
-            .then(res => res.json())
-            .then(json => {
-                console.log(json);
-                setCourseCnt(json.count);
-                setCourseList(json.responseCourses);
-            })
-        }
+        fetch(BASE_URL+'/check', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization' : 'Bearer ' + ACCESS_TOKEN
+            },
+            body: JSON.stringify(myDateCourse)
+        })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json);
+            if(!json){
+                fetch(BASE_URL, {
+                            method: 'POST',
+                            headers: {
+                                'Content-type': 'application/json',
+                                'Authorization' : 'Bearer ' + ACCESS_TOKEN
+                            },
+                            body: JSON.stringify(myDateCourse)
+                        })
+                        .then(res => res.json())
+                        .then(json => {
+                            console.log(json);
+                            setCourseCnt(json.count);
+                            setCourseList(json.responseCourses);
+                        })
+            }
+        })
+
         
     };
 
@@ -115,7 +128,7 @@ const NewDateCourse = () => {
         console.log(pageId);
         let today = moment(value).format("YYYY-MM-DD");
         setMyDateCourse({postId: pageId, meetingDate: today});
-
+        clickDateHandler();
     },[]);
 
     const noSchedule = (
