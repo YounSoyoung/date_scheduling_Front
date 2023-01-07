@@ -1,14 +1,19 @@
 import React, {useState} from "react";
 import '../css/OneCourse.css';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
-import { display } from "@mui/system";
-import { yellow } from "@mui/material/colors";
-
-const OneCourse = ({mypost}) => {
-    const [mypostState, setMyPostState] = useState(mypost);
 
 
-    const {postId, title} = mypostState;
+const OneCourse = ({course, deleteCourse}) => {
+    const [mycourseState, setMyCourseState] = useState(course);
+    const {courseId, postId, title} = mycourseState;
+
+
+
+    const deleteCourseHandler = e => {
+        console.log(course);
+
+        deleteCourse(courseId);
+    };
 
     
 
@@ -19,7 +24,7 @@ const OneCourse = ({mypost}) => {
                 <div className="courseTitle">{title}</div>
             </div>
             {/* <ClearOutlinedIcon style={{justifySelf: "flex-end" }}/> */}
-            <div className="deleteIcon">
+            <div className="deleteIcon" onClick={deleteCourseHandler}>
                 <ClearOutlinedIcon />
             </div>
             

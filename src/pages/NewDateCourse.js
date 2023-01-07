@@ -17,18 +17,19 @@ const NewDateCourse = () => {
 
     //선택한 날짜
     const dateRef = useRef(null);
-    const [meetingDate, setMeetingDate] = useState(null);
+    // const [meetingDate, setMeetingDate] = useState(null);
 
     const [myDateCourse, setMyDateCourse] = useState({
         postId: '',
         meetingDate: ''
     });
+    const myDateCourseRef = useRef(myDateCourse);
 
     const location = useLocation();
 
     //날짜를 선택한 후 받게 되는 POST 객체
-    const [mypostList, setMyPostList] = useState([]);
-    const [postCnt, setPostCnt] = useState(0);
+    const [courseList, setCourseList] = useState([]);
+    const [courseCnt, setCourseCnt] = useState(0);
 
     //날짜 선택 -> 전에 저장해놨던 일정을 조회(저장되어있는 POST)
     const clickDateHandler = e => {
@@ -48,15 +49,39 @@ const NewDateCourse = () => {
         .then(res => res.json())
         .then(json => {
             console.log(json);
-            setPostCnt(json.count);
-            setMyPostList(json.posts);
+            setCourseCnt(json.count);
+            setCourseList(json.responseCourses);
         });
 
-        // addCourseHandler(myDateCourse);
 
     }
 
-    const mycourseItems = mypostList.map(mypost => <OneCourse key={mypost.postId} mypost={mypost}/>)
+    //등록된 일정 삭제하기
+    const deleteCourse = (courseId) => {
+        console.log(courseId);
+        console.log(myDateCourse);
+
+        fetch(BASE_URL+`/${courseId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization' : 'Bearer ' + ACCESS_TOKEN
+            },
+            body: JSON.stringify(myDateCourse)
+        })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json);
+            setCourseCnt(json.count);
+            setCourseList(json.responseCourses);
+        })
+        
+    };
+
+    
+
+    const mycourseItems = courseList.map((course) => <OneCourse key={course.courseId} course={course} deleteCourse={deleteCourse}/>);
+    
 
 
 
@@ -76,8 +101,8 @@ const NewDateCourse = () => {
             .then(res => res.json())
             .then(json => {
                 console.log(json);
-                setPostCnt(json.count);
-                setMyPostList(json.posts);
+                setCourseCnt(json.count);
+                setCourseList(json.responseCourses);
             })
         }
         
@@ -111,7 +136,7 @@ const NewDateCourse = () => {
                             {moment(value).format("YYYY년 MM월 DD일")} 
                         </div>
                         <box className="mySchedules">
-                            {postCnt ? mycourseItems : noSchedule}
+                            {courseCnt ? mycourseItems : noSchedule}
                         </box>
                         <button className="addScheduleBtn" onClick={addCourseHandler}>일정 추가하기</button>
                     </div>
