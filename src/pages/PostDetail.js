@@ -105,7 +105,15 @@ const PostDetail = () => {
    };
 
    const moveNewCoursePage = e => {
-        window.location.href=`/newcourse/${postId}`
+        if(!ACCESS_TOKEN){
+            alert('로그인이 필요한 서비스입니다');
+            window.location.href='/login';
+       }
+
+       if(ACCESS_TOKEN){
+            window.location.href=`/newcourse/${postId}`;
+       }
+       
    };
 
 
