@@ -1,29 +1,27 @@
 import moment from "moment/moment";
 import React, {useEffect, useRef, useState} from "react";
 import Calendar from 'react-calendar';
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import '../css/Calendar.css';
 import '../css/NewDateCourse.css';
 import { API_BASE_URL } from "../config/host-config";
 import OneCourse from "../components/OneCourse";
 export const BASE_URL = API_BASE_URL + '/api/mycourses';
 
-
-const NewDateCourse = () => {
-
+const MyCourse = () => {
     const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
 
     const [value, setValue] = useState(new Date());
 
     //선택한 날짜
     const dateRef = useRef(null);
+    // const [meetingDate, setMeetingDate] = useState(null);
 
     const [myDateCourse, setMyDateCourse] = useState({
         postId: '',
         meetingDate: ''
     });
 
-    const location = useLocation();
 
     //날짜를 선택한 후 받게 되는 POST 객체
     const [courseList, setCourseList] = useState([]);
@@ -119,15 +117,22 @@ const NewDateCourse = () => {
         
     };
 
+    const noLoginPage = (
+        <div className="noLogin">
+        <div style={{fontSize: 20}}>로그인이 필요한 페이지입니다</div>
+        <Link to='/login'>
+            <button className="newPostBtn">로그인</button>
+        </Link>
+    </div>
+    );
+
 
     useEffect(() => {
-        let pageLocation = location.pathname;
-        let pageId = pageLocation.substring(11);
-        console.log(pageId);
         let today = moment(value).format("YYYY-MM-DD");
-        setMyDateCourse({postId: pageId, meetingDate: today});
+        setMyDateCourse({meetingDate: today});
         clickDateHandler();
     },[]);
+
 
     const noSchedule = (
         <div className="oneCourse">
@@ -135,9 +140,8 @@ const NewDateCourse = () => {
         </div>
     );
 
-    return (
-        <>
-            <div className="wrapperDateCourse">
+    const mycoursePage = (
+        <div className="wrapperMyCourse" style={{marginBottom: 50}}>
                 <h5 style={{fontSize: 40, marginBottom: 40}}>내 일정</h5>
                 <div style={{fontSize: 15}}>날짜를 선택해주세요</div>
                 <div className="courseBox">
@@ -149,14 +153,18 @@ const NewDateCourse = () => {
                         <box className="mySchedules">
                             {courseCnt ? mycourseItems : noSchedule}
                         </box>
-                        <button className="addScheduleBtn" onClick={addCourseHandler}>일정 추가하기</button>
                     </div>
                         
                 </div>
 
             </div>
+    );
+
+    return(
+        <>
+            {ACCESS_TOKEN ? mycoursePage : noLoginPage}
         </>
     );
 };
 
-export default NewDateCourse;
+export default MyCourse;
