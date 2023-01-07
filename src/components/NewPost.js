@@ -3,6 +3,7 @@ import React from "react";
 import { useRef, useState } from "react";
 import '../css/NewPost.css';
 import { API_BASE_URL } from "../config/host-config";
+import { display } from "@mui/system";
 export const BASE_URL = API_BASE_URL + '/api/posts';
 
 
@@ -115,22 +116,20 @@ const NewPost = () => {
     
 
     const addClickHandler  = e => {
+        //post 작성 정보 (JSON) + 리뷰 사진
+        //서버에 여러가지 정보를 보낼 때 multipart/form-data
+        const postFormData = new FormData();
 
-        // console.log('post:', post);
-        // console.log('cate:', category);
-        
-        // setPostCateDTO({post,category});
-        // console.log(postCateDTO);
-        // add(postCateDTO);
-        // window.location.href = '/';
+        const postBlob = new Blob([JSON.stringify({post, category})], { type: "application/json" });   //userInfo와 profileImg는 다른 타입이기 때문에
+                                                                                                //userBlob으로 통일시켜준다
+
+        //게시글 정보 JSON append(key값, 전달할 값)
+        postFormData.append('postInfo', postBlob);
+        postFormData.append('postImg', $fileInput.current.files[0]);
 
         fetch(`${BASE_URL}/new`, {
             method: 'POST',
-            headers: { 
-                'content-type':'application/json',
-                'Authorization': 'Bearer ' + ACCESS_TOKEN
-            },
-            body: JSON.stringify({post, category})
+            body: postFormData
         }).then(res => {
             if (res.status === 200 || res.status === 201) {
                 window.location.href='/';
@@ -211,7 +210,7 @@ const NewPost = () => {
                 <div className="newContent">
                     <div className="thumbnail-box" onClick={fileClickHandler}>
                         <img src={imgFile ? imgFile : require("../assets/img/addImg.png")} />
-                        <span style={{fontSize: 15}}>사진 추가</span>
+                        {/* <span style={{fontSize: 15}}>사진 추가</span> */}
                     </div>
 
                     <input id="postImg" type="file" accept="image/*" style={{display: "none"}} onChange={showImageHandler} ref={$fileInput}/>
