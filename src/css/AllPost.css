@@ -1,7 +1,6 @@
 /* CSS 추가 */
 /* 카테고리 */
 .searchBox{
-    margin-top: 40px;
     width: 85%;
     margin: 0 auto;
 }
@@ -42,6 +41,7 @@
 
 .wrapper{
     width: 100%;
+    margin-top: 60px;
 }
 
 .main{
