@@ -15,6 +15,7 @@ import Comment from "../components/Comment";
 import ModifyPost from "../pages/ModifyPost";
 import NewDateCourse from "../pages/NewDateCourse";
 import ModifyUser from "../components/ModifyUser";
+import MyCourse from "../pages/MyCourse";
 
 const AppRouter = () => {
     return (
@@ -42,6 +43,7 @@ const AppRouter = () => {
                     <Route path="/mypost" element={<MyPost/>}/>
                     <Route path="/mylike" element={<MyLike />}/>
                     <Route path="/mybookmark" element={<MyBookmark />}/>
+                    <Route path="/mydatecourse" element={<MyCourse />}/>
                 </Route>
             </Routes>
         </>

@@ -60,7 +60,7 @@ const Header = () => {
                     <li><a href="/mypost">내 리뷰</a></li>
                     <li><a href="/mylike">내 좋아요</a></li>
                     <li><a href="/mybookmark">내 북마크</a></li>
-                    <li><a href="#">내 데이트 코스</a></li>
+                    <li><a href="/mydatecourse">내 데이트 코스</a></li>
                     <li><a href="/modify">개인정보 수정</a></li>
                     
                 </ul>
