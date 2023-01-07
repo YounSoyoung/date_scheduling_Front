@@ -67,11 +67,11 @@ const MyLike = () => {
 
     const noLoginPage = (
         <div className="noLogin">
-        <div style={{fontSize: 20}}>로그인이 필요한 페이지입니다</div>
-        <Link to='/login'>
-            <button className="newPostBtn">로그인</button>
-        </Link>
-    </div>
+            <div style={{fontSize: 20}}>로그인이 필요한 페이지입니다</div>
+            <Link to='/login'>
+                <button className="newPostBtn">로그인</button>
+            </Link>
+        </div>
     );
 
 
