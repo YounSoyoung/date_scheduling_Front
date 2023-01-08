@@ -107,11 +107,6 @@ const PostDetail = () => {
 
    };
 
-   const noMorePost = (
-    <div style={{display: "flex", justifyContent: "center", color: "gray"}}>다른 리뷰가 없습니다</div>
-   );
-
-
    const moveNewCoursePage = e => {
         if(!ACCESS_TOKEN){
             alert('로그인이 필요한 서비스입니다');
@@ -185,6 +180,7 @@ const PostDetail = () => {
 
     },[]);
 
+    const img = postImg ? <img src={postImg } /> : <></>;
     
     
 
@@ -205,7 +201,7 @@ const PostDetail = () => {
                 <div className="date">{userId} | {postDate}</div>
                 <figure className="postImage">
                     <div className="placeImg">
-                        <img src={postImg} />
+                        {img}
                     </div>
                 </figure>
                 <section className="content">
@@ -221,7 +217,7 @@ const PostDetail = () => {
                         <span style={{fontSize: 25, fontWeight: "bold", marginLeft: 25}} >{category.area} {category.address}에 대한 리뷰들 더보기</span>
                         <ExpandMoreIcon style={{fontSize: "40"}}/>
                     </label>
-                    <div className="morePosts" style={{marginBottom: 50}}>
+                    <div className="myPosts" style={{marginBottom: 50}}>
                         {postItems}
                     </div>
                 </div>

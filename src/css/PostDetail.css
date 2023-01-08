@@ -28,9 +28,9 @@ h2{
 
 
 .postImage {
-    background: #f2f2f2;
+    
     width: 50%;
-    height: 380px;
+    max-height: 380px;
     margin: 40px auto;
     border-radius: 10px;
     overflow: hidden;

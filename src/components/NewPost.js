@@ -225,7 +225,7 @@ const NewPost = () => {
 
                 {/* 사진 넣기 */}
                 <div className="newContent">
-                    <div className="thumbnail-box" onClick={fileClickHandler}>
+                    <div className="postImg-box" onClick={fileClickHandler}>
                         <img src={imgFile ? imgFile : require("../assets/img/newPostImg.png")} />
                     </div>
 

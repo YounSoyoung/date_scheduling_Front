@@ -2,6 +2,10 @@
     min-height:600px;
 }
 
+#root{
+    margin-top:200px;
+}
+
 .wrapper {
     width: 85%;
     margin: 0 auto;
