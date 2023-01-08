@@ -13,6 +13,10 @@ const MyPost = () => {
     //토큰 가져오기
     const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
 
+    //프로필 사진 상태관리
+    const [postImg, setPostImg] = useState(null);
+
+    //사진 저장
     const [mypostList, setMyPostList] = useState([]);
     const [postCnt, setPostCnt] = useState(0);
 
@@ -32,7 +36,34 @@ const MyPost = () => {
 
     };
 
-    const mypostItems = mypostList.map(mypost => <Post key={mypost.postId} mypost={mypost} remove={remove}/>)
+    // const getPostImg = (postId) => {
+
+    //     //요청 URL
+    //     const url = API_BASE_URL + `/api/posts/load-postImg/${postId}`;
+
+    //     //액세스 토큰
+
+    //     //화면이 렌더링될 때 서버에서 사진을 요청하여 가져옴
+    //     fetch(url, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Authorization': 'Bearer ' + ACCESS_TOKEN
+    //         }
+    //     })
+    //     .then(res => {
+    //         if(res.status === 200){
+    //             return res.blob();
+    //         }
+    //         return setPostImg(null);
+    //     })
+    //     .then(imageData => {
+    //         //서버가 보낸 순수 이미지 파일을 URL 형식으로 변환
+    //         const imgUrl = window.URL.createObjectURL(imageData);
+    //         setPostImg(imgUrl);
+    //     })
+    // };
+
+    const mypostItems = mypostList.map(mypost => <Post key={mypost.postId} mypost={mypost} remove={remove} />)
 
     useEffect(() => {
         //사용자가 작성한 리뷰 목록 불러오기

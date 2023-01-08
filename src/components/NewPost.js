@@ -15,6 +15,7 @@ const NewPost = () => {
     const [imgFile, setImgFile] = useState(null);
     
     const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
+
     
 
     const [post,setPost] = useState({
@@ -23,7 +24,7 @@ const NewPost = () => {
         image : '',
         content : ''
             
-        })
+        });
         
     const [area, setArea] = useState('');
     const [address, setAddress] = useState('');
@@ -129,6 +130,9 @@ const NewPost = () => {
 
         fetch(`${BASE_URL}/new`, {
             method: 'POST',
+            headers:{
+                'Authorization': 'Bearer ' + ACCESS_TOKEN
+            },
             body: postFormData
         }).then(res => {
             if (res.status === 200 || res.status === 201) {

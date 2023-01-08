@@ -20,6 +20,9 @@ const PostDetail = () => {
     const [category, setCategory] = useState({});
     const {area, address} = category;
 
+    //프로필 사진 상태관리
+    const [postImg, setPostImg] = useState(null);
+
 
     //리뷰 내용
     const [post, setPost] = useState({});
@@ -150,6 +153,27 @@ const PostDetail = () => {
                 // console.log('checkLike: ', clickRef.current);
                 setClick(json);
             })
+
+            fetch(BASE_URL+`/load-postimg/${json.post.postId}`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + ACCESS_TOKEN
+                        }
+                    })
+                    .then(res => {
+                        if(res.status === 200){
+                            return res.blob();
+                        }
+                        return setPostImg(null);
+                    })
+                    .then(imageData => {
+                            console.log('imageDate: ', imageData);
+                            //서버가 보낸 순수 이미지 파일을 URL 형식으로 변환
+                            const imgUrl = window.URL.createObjectURL(imageData);
+                            setPostImg(imgUrl);
+                    })
+
+ 
         });
 
 
@@ -175,7 +199,9 @@ const PostDetail = () => {
                 </div>
                 <div className="date">{userId} | {postDate}</div>
                 <figure className="postImage">
-                    <div className="placeImg">{image}</div>
+                    <div className="placeImg">
+                        <img src={postImg} />
+                    </div>
                 </figure>
                 <section className="content">
                     {content}
