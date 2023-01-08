@@ -1,8 +1,15 @@
+.wrapperMyPage{
+    min-height:600px;
+}
 
+#root{
+    margin-top:200px;
+}
 
 .wrapper {
     width: 85%;
     margin: 0 auto;
+    
 }
 
 .myPosts, .myLikes{
@@ -10,6 +17,13 @@
     flex-direction: row;
     flex-wrap: wrap;
     margin-top: 70px;
+}
+
+.morePosts{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 40px;
 }
 
 .nopost, .noLike, .noLogin{

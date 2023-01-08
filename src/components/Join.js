@@ -51,6 +51,7 @@ const Join = () => {
             setValidate({...validate, loginId: false})
 
         } else {
+            checkLoginId(e.target.value);
             message = '사용 가능한 아이디입니다.';
             setValidate({...validate, loginId: true})
         }
@@ -79,6 +80,7 @@ const Join = () => {
             setValidate({...validate, username: false})
 
         } else {
+            checkUsername(e.target.value);
             message = '사용 가능한 이름입니다.';
             setValidate({...validate, username: true})
         }
@@ -342,7 +344,7 @@ const Join = () => {
                         
                     </Grid>
                     <Grid item xs={12}>
-                        <Button type="submit" fullWidth variant="contained" color="primary">
+                        <Button type="submit" fullWidth variant="contained" style={{backgroundColor: 'black'}}>
                             계정 생성
                         </Button>
                     </Grid>

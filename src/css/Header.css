@@ -5,11 +5,14 @@ header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-
+    
     box-sizing: border-box;
     padding: 0 40px;
     border-bottom: 2px solid #CCCCCC;
+    position: fixed;
+    top: 0;
     
+    z-index: 1000;
     
     background: #000;
     color: #fff;    

@@ -155,15 +155,15 @@ const PostDetail = () => {
             })
 
             fetch(BASE_URL+`/load-postimg/${json.post.postId}`, {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Bearer ' + ACCESS_TOKEN
-                        }
-                    })
-                    .then(res => {
-                        if(res.status === 200){
-                            return res.blob();
-                        }
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + ACCESS_TOKEN
+                    }
+                })
+                .then(res => {
+                    if(res.status === 200){
+                        return res.blob();
+                    }
                         return setPostImg(null);
                     })
                     .then(imageData => {
@@ -180,6 +180,7 @@ const PostDetail = () => {
 
     },[]);
 
+    const img = postImg ? <img src={postImg } /> : <></>;
     
     
 
@@ -200,7 +201,7 @@ const PostDetail = () => {
                 <div className="date">{userId} | {postDate}</div>
                 <figure className="postImage">
                     <div className="placeImg">
-                        <img src={postImg} />
+                        {img}
                     </div>
                 </figure>
                 <section className="content">

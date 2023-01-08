@@ -68,6 +68,10 @@ const Comment = () => {
         // console.log(postid);
         e.preventDefault();
 
+        // console.log
+
+        // window.location.href='/'
+
         add(comment);
         setComment({content:''});
         
@@ -109,7 +113,7 @@ const Comment = () => {
             setCommentCnt(json.count);
             setCommentList(json.comments);
         })
-    },[comment])
+    },[])
 
 
 
