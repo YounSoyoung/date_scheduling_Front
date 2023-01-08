@@ -84,9 +84,7 @@ const NewPost = () => {
             ...post,
             [name] : value
         });
-        // console.log('post:', post);
-        // setPostCateDTO({post,category});
-        // console.log('dto:', postCateDTO);
+        
     }
 
    
@@ -144,6 +142,8 @@ const NewPost = () => {
 
    
     }
+
+
 
     //첨부파일 추가 이벤트
     const fileClickHandler = e => {
@@ -213,14 +213,11 @@ const NewPost = () => {
                 {/* 사진 넣기 */}
                 <div className="newContent">
                     <div className="thumbnail-box" onClick={fileClickHandler}>
-                        <img src={imgFile ? imgFile : require("../assets/img/addImg.png")} />
-                        {/* <span style={{fontSize: 15}}>사진 추가</span> */}
+                        <img src={imgFile ? imgFile : require("../assets/img/newPostImg.png")} />
                     </div>
 
                     <input id="postImg" type="file" accept="image/*" style={{display: "none"}} onChange={showImageHandler} ref={$fileInput}/>
 
-
-                    
                     <textarea className = "writecontent"  name = "content" onChange ={getValue} ></textarea>
                 </div>
              </div>

@@ -66,7 +66,6 @@ const Post = ({mypost, remove}) => {
     return (
         <Card sx={{ width: 240 }} style={{marginRight: 45}}>
             <CardMedia
-                component="img"
                 sx={{ height: 140 }}
                 image={postImg}
                 //나중에 사진이 들어간다
