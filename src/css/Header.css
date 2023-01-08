@@ -15,7 +15,12 @@ header {
     color: #fff;    
 }
 
-
+.welcome-profile {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 20px;
+  }
 
 .logo{
     font-weight: bold;
@@ -85,6 +90,7 @@ a {
     background:#000;
     opacity:0.8;
     font-size: 30px;
+    margin-top: 90px;
     
     width: 450px;
     min-height : 2000px;
@@ -97,10 +103,9 @@ a {
     flex-direction:row-reverse;
     box-sizing: border-box;
     transition: 0.4s;
-    padding: 100px 40px 0px 0px;
+    padding: 20px 40px 0px 0px;
 
     justify-content: space-around;
-
 }
 
 
