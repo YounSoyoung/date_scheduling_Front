@@ -259,6 +259,8 @@ const ModifyPost = () => {
                             onChange={getContentValue}
                             type="text"
                             value={content}
+                            multiline="true"
+                            fullWidth="true"
                         />
                     </content>
                 </div>
