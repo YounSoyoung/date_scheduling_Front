@@ -10,6 +10,9 @@ const ModifyPost = () => {
     //토큰 가져오기
     const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
 
+    //프로필 사진 상태관리
+    const [postImg, setPostImg] = useState(null);
+
     //카테고리 값
     const [category, setCategory] = useState({});
     const {area, address} = category;
@@ -86,22 +89,7 @@ const ModifyPost = () => {
         setPost({...post, content: e.target.value});  
     };
 
-    // const getTitleValue = e => {
-    //     console.log(e.target.value);
-    //     setModifyPost({...modifyPost, title: e.target.value});  
-    // };
 
-    // const getValue = e =>{
-    //     const {name, value} = e.target;
-    //     // console.log('text:', value);
-    //     setPost({
-    //         ...post,
-    //         [name] : value
-    //     });
-    //     // console.log('post:', post);
-    //     // setPostCateDTO({post,category});
-    //     // console.log('dto:', postCateDTO);
-    // }
 
     const areaItems = areaList.map(area => <MenuItem value={area.area}>{area.area}</MenuItem>)
     const addressItems = addressList.map(address => <MenuItem value={address.address}>{address.address}</MenuItem>)
@@ -143,9 +131,25 @@ const ModifyPost = () => {
             console.log(json);
             setCategory(json.category);
             setPost(json.post);
-            // setModifyPost({...modifyPost, title: json.post.title});
-            // console.log(modifyPost);
-            // console.log(post.title);
+            
+            fetch(BASE_URL+`/load-postimg/${json.post.postId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + ACCESS_TOKEN
+                }
+            })
+            .then(res => {
+                if(res.status === 200){
+                    return res.blob();
+                }
+                    return setPostImg(null);
+                })
+                .then(imageData => {
+                        console.log('imageDate: ', imageData);
+                        //서버가 보낸 순수 이미지 파일을 URL 형식으로 변환
+                        const imgUrl = window.URL.createObjectURL(imageData);
+                        setPostImg(imgUrl);
+                })
 
         })
     },[myPostLocation]);
@@ -215,6 +219,9 @@ const ModifyPost = () => {
                             type="text"
                             value={image}
                         />
+                        <div className="postImg-box">
+                            <img src={postImg ? postImg : require("../assets/img/newPostImg.png")} />
+                        </div>
                     </content>
                     <content className = "updateContent">
                         <InputBase
