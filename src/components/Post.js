@@ -71,7 +71,6 @@ const Post = ({mypost, remove}) => {
                 image={postImg}
                 //나중에 사진이 들어간다
             >
-                {/* <img src={postImg} art="게시글사진"/> */}
             </CardMedia>
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div" onClick={movePageHandler}>
