@@ -109,7 +109,7 @@ const Comment = () => {
             setCommentCnt(json.count);
             setCommentList(json.comments);
         })
-    },[comment])
+    },[commentList])
 
 
 
