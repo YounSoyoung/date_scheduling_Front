@@ -1,3 +1,26 @@
 .hello{
     min-height : 600px;
 }
+
+.thumbnail-box {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 30px auto 10px;
+    cursor: pointer;
+  }
+  
+  .thumbnail-box img {
+    width: 100px;
+    height: 100px;
+  }
+  .signup-img-label {
+    font-weight: bold;
+    font-size: 17px;
+    color: #0095f6;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+  }

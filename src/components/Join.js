@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 import {Button, Container, Grid, TextField, Typography, Link} from "@mui/material";
 import "../css/Join.css";
 import { API_BASE_URL } from "../config/host-config";
 import { json } from "react-router-dom";
 
 const Join = () => {
+
+    //파일 인풋 dom 객체 useRef로 관리하기
+    const $fileInput = useRef();
+    const [imgFile, setImgFile] = useState(null);
 
     // 회원 입력 정보 상태관리
     const [user, setUser] = useState({
@@ -198,10 +202,14 @@ const Join = () => {
         // 회원입력정보를 모두 읽어서 서버에 요청
 
         if(isValid()) { // validate값이 모두 true일 경우
+            const userFormData = new FormData();
+            const userBlob = new Blob([JSON.stringify(user)], { type: "application/json" });
+            //유저정보 JSON
+            userFormData.append('userInfo',userBlob);
+            userFormData.append('profileImg',$fileInput.current.files[0]);
             fetch(API_BASE_URL+'/auth/join', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(user)
+                body:userFormData
             }).then(res => {
                 if (res.status === 200) {
                     alert('회원가입을 축하합니다!!');
@@ -215,6 +223,31 @@ const Join = () => {
         }
     };
 
+    //첨부 파일 추가 클릭 기능
+    const fileClickHandler = e =>{
+        $fileInput.current.click();
+    }
+
+    //이미지 썸네일 체인지 이벤트
+    const showImageHandler = e => {
+        //첨부파일의 데이터를 읽어온다
+        const fileData = $fileInput.current.files[0];
+        //첨부 파일의 바이트데이터를 읽기 위한 객체
+        const reader = new FileReader();
+        //파일 바이트데이터를 img src나 a의 href에 넣기 위한 모양으로 바꿔서 로딩해줌
+        reader.readAsDataURL(fileData);
+        //첨부 파일이 등록되는 순간에 이미지 셋팅
+        reader.onloadend = e => {
+            //이미지 src 등록
+            setImgFile(reader.result);
+        };
+    };
+
+
+
+
+
+
 
     return (
 
@@ -227,6 +260,26 @@ const Join = () => {
                         </Typography>
                     </Grid>
 
+                    <Grid items xs = {12}>
+                        <div className = "thumbnail-box" onClick = {fileClickHandler}>
+                            <img
+                                src = {imgFile ? imgFile : require("../assets/img/image-add.png")}
+                                alt = "프로필 썸네일"
+                            />
+                        </div>
+                        
+                        <label className = "signup-img-label" htmlFor="profileImg">프로필 이미지 추가</label>
+                        <input
+                            id="profileImg"
+                            type = "file"
+                            accept = "image/*"
+                            style = {{display : 'none'}}
+                            onChange = {showImageHandler}
+                        ref={$fileInput}
+                        />
+                    </Grid>
+
+                    
                     <Grid item xs={12}>
                         <TextField
                             autoComplete="fname"
