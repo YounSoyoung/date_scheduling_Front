@@ -107,6 +107,11 @@ const PostDetail = () => {
 
    };
 
+   const noMorePost = (
+    <div style={{display: "flex", justifyContent: "center", color: "gray"}}>다른 리뷰가 없습니다</div>
+   );
+
+
    const moveNewCoursePage = e => {
         if(!ACCESS_TOKEN){
             alert('로그인이 필요한 서비스입니다');
@@ -216,7 +221,7 @@ const PostDetail = () => {
                         <span style={{fontSize: 25, fontWeight: "bold", marginLeft: 25}} >{category.area} {category.address}에 대한 리뷰들 더보기</span>
                         <ExpandMoreIcon style={{fontSize: "40"}}/>
                     </label>
-                    <div className="myPosts" style={{marginBottom: 50}}>
+                    <div className="morePosts" style={{marginBottom: 50}}>
                         {postItems}
                     </div>
                 </div>
