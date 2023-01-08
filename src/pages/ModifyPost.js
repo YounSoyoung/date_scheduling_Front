@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { API_BASE_URL } from "../config/host-config";
 import { useLocation } from "react-router-dom";
 import { Box, FormControl, InputLabel, Select, MenuItem,TextField, InputBase } from "@mui/material";
@@ -7,10 +7,13 @@ import "../css/ModifyPost.css";
 export const BASE_URL = API_BASE_URL + '/api/posts';
 
 const ModifyPost = () => {
+    //파일 인풋 DOM 객체 useRef로 관리하기
+    const $fileInput = useRef();
+
     //토큰 가져오기
     const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
 
-    //프로필 사진 상태관리
+    //이미지 사진 상태관리
     const [postImg, setPostImg] = useState(null);
 
     //카테고리 값
@@ -79,10 +82,6 @@ const ModifyPost = () => {
         setPost({...post, title: e.target.value});  
     };
 
-    const getImageValue = e => {
-        console.log(e.target.value);
-        setPost({...post, image: e.target.value});  
-    };
 
     const getContentValue = e => {
         console.log(e.target.value);
@@ -99,20 +98,29 @@ const ModifyPost = () => {
         console.log('post:', post);
         console.log('cate:', category);
 
+        //post 작성 정보 (JSON) + 리뷰 사진
+        //서버에 여러가지 정보를 보낼 때 multipart/form-data
+        const updateFormData = new FormData();
+
+        const updateBlob = new Blob([JSON.stringify({post, category})], {type: "application/json"});
+
+        //업데이트할 정보 JSON append(key, 값)
+        updateFormData.append('updateInfo', updateBlob);
+        updateFormData.append('updateImg', $fileInput.current.files[0]);
+
         fetch(BASE_URL+`${myPostLocation.pathname}`, {
             method: 'PUT',
             headers:{
-                'content-type':'application/json',
                 'Authorization': 'Bearer ' + ACCESS_TOKEN 
             },
-            body: JSON.stringify({post, category})
+            body: updateFormData
         })
         .then(res => {
             if (res.status === 200 || res.status === 201) {
-            window.location.href='/mypost';
-        } else {
-            console.log('수정 실패!!');
-        }
+                window.location.href='/mypost';
+            } else {
+                console.log('수정 실패!!');
+            }
         })
     };
 
@@ -153,6 +161,30 @@ const ModifyPost = () => {
 
         })
     },[myPostLocation]);
+
+
+    //첨부파일 추가 이벤트
+    const fileClickHandler = e => {
+        $fileInput.current.click();
+    }
+
+    //이미지 썸네일 체인지 이벤트
+    const showImageHandler = e => {
+        //첨부파일의 데이터를 읽어온다
+        const fileData = $fileInput.current.files[0];
+        
+        //첨부파일의 바이트데이터를 읽기 위한 객체
+        const reader = new FileReader();
+        //파일 바이트데이터를 img src나 a의 href에 넣기 위한 모양으로 바꿔서 로딩해줌
+        reader.readAsDataURL(fileData);
+
+        //첨부파일이 등록되는 순간에 이미지 셋팅
+        reader.onloadend = e => {
+            //이미지 src 등록
+            setPostImg(reader.result);
+        };
+    }
+
 
     return (
         // <div>수정 페이지입니다</div>
@@ -210,18 +242,13 @@ const ModifyPost = () => {
                 <label className = "imagelabel">사진과 경험을 공유해주세요!</label>
                 <div className="newContent">
                     <content className = "updateImage">
-                        <InputBase
-                            inputProps={{
-                                "aria-label" : "naked",
-                                readOnly: false
-                            }}
-                            onChange={getImageValue}
-                            type="text"
-                            value={image}
-                        />
-                        <div className="postImg-box">
+                        
+                        <div className="postImg-box" onClick={fileClickHandler}>
                             <img src={postImg ? postImg : require("../assets/img/newPostImg.png")} />
                         </div>
+
+                        <input id="postImg" type="file" accept="image/*" style={{display: "none"}} onChange={showImageHandler} ref={$fileInput}/>
+
                     </content>
                     <content className = "updateContent">
                         <InputBase
