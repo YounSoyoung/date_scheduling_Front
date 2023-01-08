@@ -152,7 +152,7 @@ const ModifyPost = () => {
 
     return (
         // <div>수정 페이지입니다</div>
-        <div className="wrapper">
+        <div className="wrapperModify">
              <div className = "letter">리뷰수정</div>
              <div className = "categories">
                  <label className="category">카테고리</label>
