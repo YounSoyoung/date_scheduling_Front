@@ -51,6 +51,7 @@ const Join = () => {
             setValidate({...validate, loginId: false})
 
         } else {
+            checkLoginId(e.target.value);
             message = '사용 가능한 아이디입니다.';
             setValidate({...validate, loginId: true})
         }
@@ -79,6 +80,7 @@ const Join = () => {
             setValidate({...validate, username: false})
 
         } else {
+            checkUsername(e.target.value);
             message = '사용 가능한 이름입니다.';
             setValidate({...validate, username: true})
         }

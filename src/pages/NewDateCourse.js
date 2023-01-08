@@ -17,6 +17,8 @@ const NewDateCourse = () => {
 
     //선택한 날짜
     const dateRef = useRef(null);
+    //postId
+    // const postIdRef = useRef(null);
 
     const [myDateCourse, setMyDateCourse] = useState({
         postId: '',
@@ -124,8 +126,12 @@ const NewDateCourse = () => {
         let pageLocation = location.pathname;
         let pageId = pageLocation.substring(11);
         console.log(pageId);
+        // postIdRef.current = pageId;
         let today = moment(value).format("YYYY-MM-DD");
+        // setMyDateCourse({...myDateCourse, postId: pageId});
+        // setMyDateCourse({...myDateCourse, meetingDate: today});
         setMyDateCourse({postId: pageId, meetingDate: today});
+
         clickDateHandler();
     },[]);
 

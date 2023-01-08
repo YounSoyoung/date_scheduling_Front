@@ -1,6 +1,6 @@
 .courseBox {
     display: flex;
-    margin: 10px auto;
+    margin: 10px auto 60px;
 }
 
 .scheduleBox {

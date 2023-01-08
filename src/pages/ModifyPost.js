@@ -205,8 +205,6 @@ const ModifyPost = () => {
              <div className = "both">
                 <label className = "imagelabel">사진과 경험을 공유해주세요!</label>
                 <div className="newContent">
-                    {/* <textarea className = "putimage"   name = "image" onChange ={getValue}></textarea> */}
-                    {/* <textarea className = "writecontent"  name = "content" onChange ={getValue} >{content}</textarea> */}
                     <content className = "updateImage">
                         <InputBase
                             inputProps={{
