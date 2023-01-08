@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {Button, Container, Grid, TextField, Typography, Link} from "@mui/material";
-
+import "../css/Join.css";
 import { API_BASE_URL } from "../config/host-config";
 import { json } from "react-router-dom";
 
@@ -34,7 +34,7 @@ const Join = () => {
      const loginIdHandler = e => {
         // console.log(e.target.value);
 
-        const loginIdRegex = /^[a-zA-Z]{2,8}$/;    //2~8자리 영어로만
+        const loginIdRegex = /^[가-힣a-zA-Z]{2,10}$/;    //2~8자리 영어로만
 
         // loginId 가 정확히 쓰여진 loginId인가? - 검증 로직
         let message;    // 입력 상황 메시지
@@ -43,7 +43,7 @@ const Join = () => {
             setValidate({...validate, loginId: false})
         } else if (!loginIdRegex.test(e.target.value)) {  // 이름은 2~8글자 사이 한글로만. 처음엔 '정규표현식'을 검색해서 사용할 것
                     // 값이 이 정규표현식과 일치하는지 test.
-            message = '2~8 글자 사이의 영어로 입력해주세요.';
+            message = '2~10 글자 사이의 영어&한글로만 입력해주세요.';
             setValidate({...validate, loginId: false})
 
         } else {
@@ -62,7 +62,7 @@ const Join = () => {
     const usernameHandler = e => {
         // console.log(e.target.value);
 
-        const userNameRegex = /^[가-힣]{2,8}$/;    // 2~8 글자. 한글로만
+        const userNameRegex = /^[가-힣a-zA-Z]{2,10}$/;    // 2~8 글자. 한글로만
 
         // 닉네임이 정확히 쓰여진 닉네임인가? - 검증 로직
         let message;    // 입력 상황 메시지
@@ -71,7 +71,7 @@ const Join = () => {
             setValidate({...validate, username: false})
         } else if (!userNameRegex.test(e.target.value)) {  // 이름은 2~8글자 사이 한글로만. 처음엔 '정규표현식'을 검색해서 사용할 것
                     // 값이 이 정규표현식과 일치하는지 test.
-            message = '2~8글자 사이의 한글로 입력해주세요.';
+            message = '2~10글자 사이의 영어&한글로만 입력해주세요.';
             setValidate({...validate, username: false})
 
         } else {
@@ -218,7 +218,7 @@ const Join = () => {
 
     return (
 
-        <Container component="main" maxWidth="xs" style={{ marginTop: "8%" }}>
+        <Container className = "hello" component="main" maxWidth="xs" style={{ marginTop: "8%" }}>
             <form noValidate onSubmit={joinHandler}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>

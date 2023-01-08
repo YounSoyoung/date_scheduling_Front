@@ -1,12 +1,21 @@
 import { Box, FormControl, InputLabel, Select, MenuItem,TextField } from "@mui/material";
-import { useState } from "react";
+import React from "react";
+import { useRef, useState } from "react";
 import '../css/NewPost.css';
 import { API_BASE_URL } from "../config/host-config";
+import { display } from "@mui/system";
 export const BASE_URL = API_BASE_URL + '/api/posts';
 
-function NewPost(){
+
+const NewPost = () => {
+    //파일 인풋 DOM 객체 useRef로 관리하기
+    const $fileInput = useRef();
+
+    //이미지 파일 정보 상태관리
+    const [imgFile, setImgFile] = useState(null);
     
     const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
+
     
 
     const [post,setPost] = useState({
@@ -15,7 +24,7 @@ function NewPost(){
         image : '',
         content : ''
             
-        })
+        });
         
     const [area, setArea] = useState('');
     const [address, setAddress] = useState('');
@@ -108,22 +117,23 @@ function NewPost(){
     
 
     const addClickHandler  = e => {
+        //post 작성 정보 (JSON) + 리뷰 사진
+        //서버에 여러가지 정보를 보낼 때 multipart/form-data
+        const postFormData = new FormData();
 
-        // console.log('post:', post);
-        // console.log('cate:', category);
-        
-        // setPostCateDTO({post,category});
-        // console.log(postCateDTO);
-        // add(postCateDTO);
-        // window.location.href = '/';
+        const postBlob = new Blob([JSON.stringify({post, category})], { type: "application/json" });   //userInfo와 profileImg는 다른 타입이기 때문에
+                                                                                                //userBlob으로 통일시켜준다
+
+        //게시글 정보 JSON append(key값, 전달할 값)
+        postFormData.append('postInfo', postBlob);
+        postFormData.append('postImg', $fileInput.current.files[0]);
 
         fetch(`${BASE_URL}/new`, {
             method: 'POST',
-            headers: { 
-                'content-type':'application/json',
+            headers:{
                 'Authorization': 'Bearer ' + ACCESS_TOKEN
             },
-            body: JSON.stringify({post, category})
+            body: postFormData
         }).then(res => {
             if (res.status === 200 || res.status === 201) {
                 window.location.href='/';
@@ -131,8 +141,33 @@ function NewPost(){
                 console.log('등록 실패!!');
             }
         });
-        
+
+   
     }
+
+    //첨부파일 추가 이벤트
+    const fileClickHandler = e => {
+        $fileInput.current.click();
+    }
+
+    //이미지 썸네일 체인지 이벤트
+    const showImageHandler = e => {
+        //첨부파일의 데이터를 읽어온다
+        const fileData = $fileInput.current.files[0];
+        
+        //첨부파일의 바이트데이터를 읽기 위한 객체
+        const reader = new FileReader();
+        //파일 바이트데이터를 img src나 a의 href에 넣기 위한 모양으로 바꿔서 로딩해줌
+        reader.readAsDataURL(fileData);
+
+        //첨부파일이 등록되는 순간에 이미지 셋팅
+        reader.onloadend = e => {
+            //이미지 src 등록
+            setImgFile(reader.result);
+        };
+    }
+
+
     return (
        <div className="wrapperNewPost">
              <div className = "letter">리뷰작성</div>
@@ -174,8 +209,18 @@ function NewPost(){
 
              <div className = "both">
                 <label className = "imagelabel">사진과 경험을 공유해주세요!</label>
+
+                {/* 사진 넣기 */}
                 <div className="newContent">
-                    <textarea className = "putimage"   name = "image" onChange ={getValue}>사진을 넣어주세요</textarea>
+                    <div className="thumbnail-box" onClick={fileClickHandler}>
+                        <img src={imgFile ? imgFile : require("../assets/img/addImg.png")} />
+                        {/* <span style={{fontSize: 15}}>사진 추가</span> */}
+                    </div>
+
+                    <input id="postImg" type="file" accept="image/*" style={{display: "none"}} onChange={showImageHandler} ref={$fileInput}/>
+
+
+                    
                     <textarea className = "writecontent"  name = "content" onChange ={getValue} ></textarea>
                 </div>
              </div>

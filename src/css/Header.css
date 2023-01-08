@@ -9,7 +9,8 @@ header {
     box-sizing: border-box;
     padding: 0 40px;
     border-bottom: 2px solid #CCCCCC;
-
+    
+    
     background: #000;
     color: #fff;    
 }
@@ -85,11 +86,12 @@ a {
     opacity:0.8;
     font-size: 30px;
     margin-top: 90px;
-    height:100vh;
+    
     width: 450px;
-
+    min-height : 2000px;
     /*절대값으로 위치 조정*/
     position:fixed;
+    
     right: -100%;
     top:0;    
     display:flex;
