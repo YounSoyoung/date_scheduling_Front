@@ -33,6 +33,7 @@ const NewDateCourse = () => {
 
     //날짜 선택 -> 전에 저장해놨던 일정을 조회(저장되어있는 POST)
     const clickDateHandler = e => {
+        // console.log('postId:', myDateCourse.postId);
         dateRef.current = e;
         console.log(moment(dateRef.current).format("YYYY-MM-DD"));
         let selectedDate = moment(dateRef.current).format("YYYY-MM-DD");
@@ -126,13 +127,21 @@ const NewDateCourse = () => {
         let pageLocation = location.pathname;
         let pageId = pageLocation.substring(11);
         console.log(pageId);
-        // postIdRef.current = pageId;
         let today = moment(value).format("YYYY-MM-DD");
-        // setMyDateCourse({...myDateCourse, postId: pageId});
-        // setMyDateCourse({...myDateCourse, meetingDate: today});
         setMyDateCourse({postId: pageId, meetingDate: today});
 
-        clickDateHandler();
+        fetch(BASE_URL+`/mycourse/${today}`, {
+            method: 'GET',
+            headers: {
+                'Authorization' : 'Bearer ' + ACCESS_TOKEN
+            }
+        })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json);
+            setCourseCnt(json.count);
+            setCourseList(json.responseCourses);
+        });
     },[]);
 
     const noSchedule = (
