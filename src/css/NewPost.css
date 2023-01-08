@@ -7,11 +7,19 @@
 .letter{
     font-size: 40px;
     font-weight: bold;
-    margin-top:50px;
+    margin: 50px 0;
+
 } 
 
-.categories{
+.alertMsg{
+    color: red;
+    font-size: 15px;
     margin-top: 50px;
+    padding-left: 160px;
+}
+
+.categories{
+
     display:flex;
     align-items: center;
 }

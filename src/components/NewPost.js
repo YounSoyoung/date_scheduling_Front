@@ -97,15 +97,16 @@ const NewPost = () => {
     const searchHandler = e => {
         e.preventDefault();
 
+        console.log('제목 클릭');
+        console.log(category);
+
         let message;
-        if(!category.area){
+        if(category.area==''){
             message = '지역을 선택해주세요';
             setMsg(message);
-            setValidate(false);
-        } else if(!category.address){
+        } else if(category.address==''){
             message = '구를 선택해주세요';
             setMsg(message);
-            setValidate(false);
         } else {
             setMsg('');
             
@@ -115,7 +116,11 @@ const NewPost = () => {
     
 
     const addClickHandler  = e => {
-        //post 작성 정보 (JSON) + 리뷰 사진
+
+        console.log(post);
+        
+       if(post.title !== '' && post.content !== ''){
+            //post 작성 정보 (JSON) + 리뷰 사진
         //서버에 여러가지 정보를 보낼 때 multipart/form-data
         const postFormData = new FormData();
 
@@ -125,6 +130,7 @@ const NewPost = () => {
         //게시글 정보 JSON append(key값, 전달할 값)
         postFormData.append('postInfo', postBlob);
         postFormData.append('postImg', $fileInput.current.files[0]);
+
 
         fetch(`${BASE_URL}/new`, {
             method: 'POST',
@@ -139,6 +145,11 @@ const NewPost = () => {
                 console.log('등록 실패!!');
             }
         });
+
+       }else {
+            alert('제목과 내용을 입력해주세요');
+       }
+        
 
    
     }
@@ -171,6 +182,7 @@ const NewPost = () => {
     return (
        <div className="wrapperNewPost">
              <div className = "letter">리뷰작성</div>
+             <span className="alertMsg">{msg}</span>
              <div className = "categories">
                  <label className="category">카테고리</label>
                  <Box sx={{ width: 150 }} style={{marginRight:15}}>
@@ -201,10 +213,11 @@ const NewPost = () => {
                         </Select>
                     </FormControl>
                 </Box>
+                 
              </div>
              <ul className = "title">
                  <li className = "titlelabel" >제목</li>
-                 <TextField className = "titlewrite" placeholder = "제목을 입력하세요"  name = "title" onChange ={getValue}></TextField>
+                 <TextField className = "titlewrite" placeholder = "제목을 입력하세요"  name = "title" onChange ={getValue} onClick={searchHandler}></TextField>
              </ul>
 
              <div className = "both">
