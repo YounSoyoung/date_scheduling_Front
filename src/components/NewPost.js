@@ -7,6 +7,7 @@ import { display } from "@mui/system";
 export const BASE_URL = API_BASE_URL + '/api/posts';
 
 
+////////////커밋 테스트
 const NewPost = () => {
     //파일 인풋 DOM 객체 useRef로 관리하기
     const $fileInput = useRef();
