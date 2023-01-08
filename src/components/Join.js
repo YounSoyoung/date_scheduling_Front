@@ -342,7 +342,7 @@ const Join = () => {
                         
                     </Grid>
                     <Grid item xs={12}>
-                        <Button type="submit" fullWidth variant="contained" color="primary">
+                        <Button type="submit" fullWidth variant="contained" style={{backgroundColor: 'black'}}>
                             계정 생성
                         </Button>
                     </Grid>
