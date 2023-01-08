@@ -82,40 +82,7 @@ const MyCourse = () => {
 
 
     //새로운 일정 등록하기
-    const addCourseHandler = () => {
-        console.log('myDateCourse: ', myDateCourse);
-
-        fetch(BASE_URL+'/check', {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-                'Authorization' : 'Bearer ' + ACCESS_TOKEN
-            },
-            body: JSON.stringify(myDateCourse)
-        })
-        .then(res => res.json())
-        .then(json => {
-            console.log(json);
-            if(!json){
-                fetch(BASE_URL, {
-                            method: 'POST',
-                            headers: {
-                                'Content-type': 'application/json',
-                                'Authorization' : 'Bearer ' + ACCESS_TOKEN
-                            },
-                            body: JSON.stringify(myDateCourse)
-                        })
-                        .then(res => res.json())
-                        .then(json => {
-                            console.log(json);
-                            setCourseCnt(json.count);
-                            setCourseList(json.responseCourses);
-                        })
-            }
-        })
-
-        
-    };
+    
 
     const noLoginPage = (
         <div className="noLogin">
