@@ -192,7 +192,7 @@ const ModifyUser = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <Button type="submit" fullWidth variant="contained" style={{backgroundColor: 'black'}}>
-                            계정 수정
+                            비밀번호 수정
                         </Button>
                     </Grid>
                 </Grid>

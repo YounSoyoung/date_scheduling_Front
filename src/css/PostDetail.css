@@ -25,12 +25,17 @@ h2{
     margin-bottom: 10px;
 }
 
-
+.postDetailContent{
+    display: flex;
+    width: 70%;
+    margin: 0 auto;
+    align-items: center;
+}
 
 .postImage {
     
-    width: 50%;
-    max-height: 380px;
+    width: 35%;
+    max-height: 400px;
     margin: 40px auto;
     border-radius: 10px;
     overflow: hidden;
@@ -39,15 +44,18 @@ h2{
 
 .postImage img {
     width: 100%;
-    height: 380px;
+    height: 400px;
     
 }
 
 .content {
-    background: #f2f2f2;
-    width: 70%;
-    height: 300px;
-    margin: 0 auto 50px;
+    width: 60%;
+    height: 400px;
+    margin: 0 auto ;
+    padding: 10px;
+    box-sizing: border-box;
+
+    
 }
 
 .titleAndIcons{
