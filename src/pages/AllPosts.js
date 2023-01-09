@@ -132,6 +132,20 @@ const AllPost = () => {
             window.location.href = '/new';
         }
     };
+
+    const noPostPage = (
+        <div className="noPostInMain">
+            <div style={{fontSize: 20}}>아직 등록된 리뷰가 없습니다</div>
+            <div style={{fontSize: 20}}>첫번째 리뷰를 남겨주세요</div>
+        </div>
+    );
+
+    
+    const existAllPost = (
+        <div className="allPosts">
+                {postItems}
+        </div>
+    );
     
 
     
@@ -179,9 +193,7 @@ const AllPost = () => {
 
             <div className="main" style={{marginTop: 50}}>
                 <span style={{fontSize: 15, marginLeft: 30}}>총 {postCnt}개의 리뷰들</span>
-                <div className="allPosts">
-                    {postItems}
-                </div>
+                 {postCnt ? existAllPost : noPostPage}
             </div>
 
             

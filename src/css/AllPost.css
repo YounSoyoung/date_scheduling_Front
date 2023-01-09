@@ -91,32 +91,12 @@
     font-size: medium;
 }
 
-/* footer */
-footer {
-    width:100%;
-    background: #000;
-    color: #999;
-    position: relative;
-}
-
-footer ul {
-    display:flex;
-    justify-content: space-around;
+.noPostInMain{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    margin: 60px 0 0;
-
-}
-
-footer ul li:nth-child(2) {
-    color: #eee;
-    font-size: 16px;
-    color: #999;
-}
-footer ul li {
-    color: rgb(255,255,255);
-    font-size: 16px;
-    line-height: 2;
-    height: 150px;
+    padding-top: 130px;
 }
 
 

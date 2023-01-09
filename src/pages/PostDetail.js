@@ -9,6 +9,7 @@ import { TurnedIn } from "@mui/icons-material";
 import HeartButton from "../components/HeartButton";
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { color } from "@mui/system";
 
 export const BASE_URL = API_BASE_URL + '/api/posts';
 
@@ -32,10 +33,12 @@ const PostDetail = () => {
    const location = useLocation();
    const [postDate, setPostDate] = useState();
 
+   //하트를 클릭 여부
    const [click, setClick] = useState(false);
-    // const clickRef = useRef(false);
 
-    ///////////////////////////
+   const [search, setSearch] = useState(0);
+
+
     const [postList, setPostList] = useState([]);
     const [postCnt, setPostCnt] = useState(0);
     const postItems = postList.map(post => <PostInMain key={post.postId} post={post} />);
@@ -43,7 +46,9 @@ const PostDetail = () => {
     
 
     const searchPost = () => {
-        console.log("searchpost 안의 category:", category);
+
+        setSearch(1);
+
         fetch(BASE_URL+`/search${location.pathname}`, {
             method: 'POST',
             headers: {
@@ -60,7 +65,6 @@ const PostDetail = () => {
     };
 
 
-    ///////////////
 
 
    const clickLikeHandler = e => {
@@ -73,9 +77,7 @@ const PostDetail = () => {
        if(ACCESS_TOKEN){
         console.log("하트 클릭: ", click);
         setClick((click) => !click);
-        console.log('클릭후 하트 상태: ', click)
-        // clickRef.current = !clickRef.current;
-        // console.log('클릭 후 하트 상태: ', clickRef.current);
+        console.log('클릭후 하트 상태: ', click);
         }
         
 
@@ -107,6 +109,7 @@ const PostDetail = () => {
 
    };
 
+   //로그인을 안한 상태에서 하트를 클릭했을 때
    const moveNewCoursePage = e => {
         if(!ACCESS_TOKEN){
             alert('로그인이 필요한 서비스입니다');
@@ -123,34 +126,26 @@ const PostDetail = () => {
     
     useEffect(() => {
         //게시글 내용 불러오기
-        console.log(location.pathname);
         fetch(BASE_URL+`${location.pathname}`, {
             method: 'GET',
             headers: {'Content-type' : 'application/json'}  
         })
         .then(res => res.json())
         .then(json => {
-            console.log(json);
-            console.log(json.category);
             setCategory(() => json.category);
 
-            console.log(json.post);
             setPost(json.post);
             let savedDate = json.post.regDate;
             let date = savedDate.substring(0, 10);
             setPostDate(date);
-            console.log('postId: ', json.post.postId);
 
-            
-    
+            //하트를 전에 선택했었는지 정보 가져오기
             fetch(BASE_URL+`/mylike/${json.post.postId}`, {
                 method: 'GET',
                 headers: {'Authorization': 'Bearer ' + ACCESS_TOKEN}
             }).then(res => res.json())
             .then(json => {
                 console.log('하트 저장여부: ', json);
-                // clickRef.current = json;
-                // console.log('checkLike: ', clickRef.current);
                 setClick(json);
             })
 
@@ -182,6 +177,18 @@ const PostDetail = () => {
 
     const img = postImg ? <img src={postImg } /> : <></>;
     
+    const noPostPage = (
+        search ? <div style={{fontSize: 15, display: 'flex',
+                            justifyContent: 'center',
+                            marginTop: 30,
+                            color: 'gray' }}>등록된 다른 리뷰가 없습니다</div> : <></>
+    );
+
+    const morePost = (
+        <div className="myPosts" style={{marginBottom: 50}}>
+            {postItems}
+        </div>
+    );
     
 
     return(
@@ -220,9 +227,7 @@ const PostDetail = () => {
                         <span style={{fontSize: 25, fontWeight: "bold", marginLeft: 25}} >{category.area} {category.address}에 대한 리뷰들 더보기</span>
                         <ExpandMoreIcon style={{fontSize: "40"}}/>
                     </label>
-                    <div className="myPosts" style={{marginBottom: 50}}>
-                        {postItems}
-                    </div>
+                    {postCnt ? morePost : noPostPage}
                 </div>
         </>            
     );
