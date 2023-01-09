@@ -116,7 +116,8 @@ const Join = () => {
 
     // 아이디 중복확인 서버통신
     const checkLoginId = (loginId) => {
-        console.log('checkLoginId!!');
+        console.log('checkLoginId~~~');
+        console.log(API_BASE_URL);
         fetch(`${API_BASE_URL}/auth/checkid?loginId=${loginId}`)
             .then(res => res.json())
             .then(flag => {
@@ -206,6 +207,7 @@ const Join = () => {
         if(isValid()) { // validate값이 모두 true일 경우
             const userFormData = new FormData();
             const userBlob = new Blob([JSON.stringify(user)], { type: "application/json" });
+
             //유저정보 JSON
             userFormData.append('userInfo',userBlob);
             userFormData.append('profileImg',$fileInput.current.files[0]);
