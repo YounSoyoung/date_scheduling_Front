@@ -40,7 +40,7 @@ const MyPageLayout = () => {
             <div className="mypage" onClick={activeChange}>
                 <Link id="mypost" to='/mypost'>내 리뷰</Link>
                 <Link id="mylike" to='/mylike'>내 좋아요</Link>
-                <Link id="mybookmark" to='/mybookmark'>내 북마크</Link>
+                {/* <Link id="mybookmark" to='/mybookmark'>내 북마크</Link> */}
                 <Link id="mydatecourse" to='/mydatecourse'>내 데이트 코스</Link>
             </div>
             <div>

@@ -194,19 +194,22 @@ const PostDetail = () => {
                     <h1 className="postTitle">{title}</h1>
                     <div className="postIcons">
                         <FontAwesomeIcon icon={faCalendar} size="2x" onClick={moveNewCoursePage}/>
-                        <FontAwesomeIcon icon={faBookmark} size="2x"/>
+                        {/* <FontAwesomeIcon icon={faBookmark} size="2x"/> */}
                         <HeartButton like={click} onClick={clickLikeHandler}/>
                     </div>
                 </div>
                 <div className="date">{userId} | {postDate}</div>
-                <figure className="postImage">
-                    <div className="placeImg">
-                        {img}
-                    </div>
-                </figure>
-                <section className="content">
-                    {content}
-                </section>
+                <div className="postDetailContent">
+                    <figure className="postImage">
+                        <div className="placeImg">
+                            {img}
+                        </div>
+                    </figure>
+                    <section className="content">
+                        {content}
+                    </section>
+                </div>
+                
                 <div>
                     <Outlet />
                 </div>

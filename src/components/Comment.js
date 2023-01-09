@@ -50,6 +50,7 @@ const Comment = () => {
             }).then(res => res.json())
             .then(json => {
                 console.log(json);
+                setCommentCnt(json.count);
                 setCommentList(json.comments);
             })
         }else if(ACCESS_TOKEN==null){
@@ -61,16 +62,14 @@ const Comment = () => {
     };
 
     const addClickHandler  = e => {        
-        // console.log(comment);
-        // console.log(USERNAME);
+        console.log("add클릭");
+        console.log('location: ', location);
         // let pageLocation = location.pathname;
         // let postid = pageLocation.substring(1);
         // console.log(postid);
         e.preventDefault();
 
         // console.log
-
-        // window.location.href='/'
 
         add(comment);
         setComment({content:''});
@@ -113,7 +112,7 @@ const Comment = () => {
             setCommentCnt(json.count);
             setCommentList(json.comments);
         })
-    },[])
+    },[commentCnt])
 
 
 
