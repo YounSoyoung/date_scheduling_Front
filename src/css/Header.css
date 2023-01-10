@@ -131,12 +131,12 @@ a {
     margin-bottom : 50px;
 }
 
-a{
+.gnb a{
     font-size: 27px;
     color: #fff;
 }
 
-a:hover{
+.gnb a:hover{
     font-weight: bold;
     font-size: 30px;
 }
