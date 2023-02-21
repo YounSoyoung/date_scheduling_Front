@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {Button, Container, Grid, TextField, Typography, Link} from "@mui/material";
 import "../css/Join.css";
 import { API_BASE_URL } from "../config/host-config";
@@ -139,7 +139,13 @@ const ModifyUser = () => {
 
 
 
-
+    useEffect(() => {
+        console.log('Access Token 값: ', ACCESS_TOKEN);
+        if(!ACCESS_TOKEN){
+            alert('로그인이 필요한 서비스입니다');
+            window.location.href='/login';
+        }
+    },[]);
 
 
 
